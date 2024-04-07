@@ -30,7 +30,7 @@ const calculateNOfLineFunction = ({ point, slope }) => {
     const n = point.y - slope * point.x
     return n;
 }
-
+//שיפוע
 const calculateSlope = (point1, point2) => {
     const slope = (point1.y - point2.y) / (point1.x - point2.x)
     return slope

@@ -5,7 +5,7 @@ const Line=require("../../modules/ecs6-class/line")
 
 describe("calculateDistance", () => {
     it("return the correct answer", () => {    
-        expect(calculateDistance(new Point(5,2),new Point(2,5))).toBe(3)
+        expect(calculateDistance(new Point({x:5,y:2}),new Point({x:2,y:5}))).toBe(3)
     });
 });
  

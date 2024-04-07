@@ -5,12 +5,16 @@ class Point {
     }
     moveVertical(value) {
         if(value==undefined)
-            throw new Error("the y is undefined")
+            throw new Error("the value is undefined")
+        if(!typeof value == Number)
+            throw new Error("the value is not a number")
         this.y += value;
     }
     moveHorizontal(value) {
         if(value===undefined)
-            throw new Error("the x is undefined")
+            throw new Error("the value is undefined")
+        if(!typeof value == Number)
+            throw new Error("the value is not a number")
         this.x += value;
     }
 

@@ -5,8 +5,8 @@ class Line {
     constructor({ point1 = undefined, point2 = undefined, n = undefined, slope = undefined }) {
         this.point1 = point1;
         this.point2 = point2;
-        this.slope = slope;
         this.n = n;
+        this.slope = slope;
     }
     addPoint(point) {
         if (this.point1 === undefined) {
@@ -71,23 +71,23 @@ class Line {
         }
         return false
     }
-//מחזיר את נקודת המפגש של הנקודה עם ציר
+//מחזיר את נקודת המפגש של הישר עם ציר
 //y- ה
     getPointByX(x) {
-        if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
+        if(this.point2===undefined||this.point2===undefined)
             throw new Error("exit empty property")
         if (this.slope && this.n) {
             let y = this.slope * x + this.n
             return new Point({ x, y })
         }
     }
-//מחזיר את נקודת המפגש של הנקודה עם ציר
+//מחזיר את נקודת המפגש של הישר עם ציר
 //x- ה
     getPointByY(y) {
-        if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
+        if(this.point2===undefined||this.point2===undefined)
             throw new Error("exit empty property")
         if (this.slope && this.n) {
-            let x = (y - this.slope) / this.n;
+            let x = (y - this.n) / this.slope;
             return new Point({ x, y })
         }
     }
