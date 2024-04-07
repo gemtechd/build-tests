@@ -71,15 +71,21 @@ class Line {
         }
         return false
     }
-
+//מחזיר את נקודת המפגש של הנקודה עם ציר
+//y- ה
     getPointByX(x) {
+        if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
+            throw new Error("exit empty property")
         if (this.slope && this.n) {
             let y = this.slope * x + this.n
             return new Point({ x, y })
         }
     }
-
+//מחזיר את נקודת המפגש של הנקודה עם ציר
+//x- ה
     getPointByY(y) {
+        if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
+            throw new Error("exit empty property")
         if (this.slope && this.n) {
             let x = (y - this.slope) / this.n;
             return new Point({ x, y })
