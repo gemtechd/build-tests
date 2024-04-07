@@ -9,12 +9,18 @@ class Line {
         this.n = n;
     }
     addPoint(point) {
+        if (!point) {
+            throw new Error('the point is null')
+        }
         if (this.point1 === undefined) {
             this.point1 = point
         }
         else {
             if (this.point2 === undefined) {
                 this.point2 = point
+            }
+            else {
+                throw new Error('2 points are null')
             }
         }
     }
@@ -32,6 +38,9 @@ class Line {
             if (this.point1 && this.point2) {
                 this.slope = calculateSlope(this.point1, this.point2)
             }
+            else {
+                throw new Error('At least one point is empty')
+            }
         }
         return this.slope
     }
@@ -43,26 +52,31 @@ class Line {
     get N() {
         if (!this.n) {
             if ((this.point1 || this.point2) && this.slope)
-                this.n = calculateNOfLineFunction({ point: this.point1 | this.point2, slope: this.slope })
+                this.n = calculateNOfLineFunction({ point: this.point1 || this.point2, slope: this.slope })
+            else
+                throw new Error('Missing data for calculation')
         }
         return this.n
     }
 
     getPointOnXAsis() {
         if (this.slope) {
-            return this.getPointByX(0)
+            return this.getPointByY(0)//I changed from getPointByX to getPointByY
         }
         return undefined
     }
 
     getPointOnYAsis() {
         if (this.slope) {
-            return this.getPointByY(0)
+            return this.getPointByX(0)//I changed from getPointByY to getPointByX
         }
         return undefined
     }
+
     isPointOnLine(point) {
-        const slope2 = calculateSlope(this.point1 | this.point2, point)
+        const slope2 = calculateSlope(this.point1 || this.point2, point)//I added |
+        // console.log('slope2', slope2)
+        // console.log('this.slope', this.slope)
         if (this.slope === slope2) {
             const n2 = calculateNOfLineFunction({ point, slope: slope2 })
             if (this.n === n2) {
@@ -81,7 +95,7 @@ class Line {
 
     getPointByY(y) {
         if (this.slope && this.n) {
-            let x = (y - this.slope) / this.n;
+            let x = (y - this.n) / this.slope;
             return new Point({ x, y })
         }
     }
