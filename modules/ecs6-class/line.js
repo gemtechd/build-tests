@@ -5,10 +5,15 @@ class Line {
     constructor({ point1 = undefined, point2 = undefined, n = undefined, slope = undefined }) {
         this.point1 = point1;
         this.point2 = point2;
-        this.slope = slope;
         this.n = n;
+        this.slope = slope;
     }
     addPoint(point) {
+        if (point == undefined) {
+            throw new Error("the point isn't initializad")
+        }
+        if (this.point1 && this.point2)
+            throw new Error("both points are initialized")
         if (this.point1 === undefined) {
             this.point1 = point
         }
@@ -20,10 +25,20 @@ class Line {
     }
 
     get Points() {
+        if (this.point1 === undefined && this.point2 === undefined)
+            throw new Error("both points are not initialized")
+        if (this.point1 === undefined)
+            throw new Error("point1 is not initialized")
+        if (this.point2 === undefined)
+            throw new Error("point2 is not initialized")
         return { point1: this.point1, point2: this.point2 }
     }
 
     set Slope(slope) {
+        if (!slope)
+            throw new Error("the value of slope is undefined")
+        if(!typeof slope ==Number)
+            throw new Error("the value of slopeis not a number")
         this.slope = slope;
     }
 
@@ -71,23 +86,23 @@ class Line {
         }
         return false
     }
-//מחזיר את נקודת המפגש של הנקודה עם ציר
-//y- ה
+    //מחזיר את נקודת המפגש של הישר עם ציר
+    //y- ה
     getPointByX(x) {
-        if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
+        if (this.point2 === undefined || this.point2 === undefined)
             throw new Error("exit empty property")
         if (this.slope && this.n) {
             let y = this.slope * x + this.n
             return new Point({ x, y })
         }
     }
-//מחזיר את נקודת המפגש של הנקודה עם ציר
-//x- ה
+    //מחזיר את נקודת המפגש של הישר עם ציר
+    //x- ה
     getPointByY(y) {
-        if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
+        if (this.point2 === undefined || this.point2 === undefined)
             throw new Error("exit empty property")
         if (this.slope && this.n) {
-            let x = (y - this.slope) / this.n;
+            let x = (y - this.n) / this.slope;
             return new Point({ x, y })
         }
     }

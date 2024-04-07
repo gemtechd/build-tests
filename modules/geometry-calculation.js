@@ -16,7 +16,7 @@ const calculateJunctionPoint = (line1, line2) => {
     }
     else {
         const x = (line1.n - line2.n) / (line2.slope - line1.slope)
-        console.log({x})
+        console.log({ x })
         console.log(line2.getPointByX(x))
         return line1.getPointByX(x)
     }
@@ -30,7 +30,7 @@ const calculateNOfLineFunction = ({ point, slope }) => {
     const n = point.y - slope * point.x
     return n;
 }
-
+//שיפוע
 const calculateSlope = (point1, point2) => {
     const slope = (point1.y - point2.y) / (point1.x - point2.x)
     return slope
