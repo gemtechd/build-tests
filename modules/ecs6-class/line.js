@@ -6,7 +6,7 @@ class Line {
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
-        if ((this.point1 || this.point2) && this.slope) {
+        if ((this.point1 || this.point2) && this.Slope) {
             console.log('in if');
             this.n = calculateNOfLineFunction({ point: this.point1 || this.point2, slope: this.slope })
         }
@@ -65,27 +65,21 @@ class Line {
     }
 
     get N() {
-        console.log("before- n=" + this.n)
+        // console.log("before- n=" + this.n)
         if (!this.n) {
-            // console.log('in if 1');
-            // console.log('this:' + this);
-            // console.log('this.point1: ' + this.point1);
-            // console.log('this.point2: ' + this.point2);
-            // console.log('slope: ' + this.Slope);
             if ((this.point1 || this.point2) && this.Slope) {
-                // console.log('in if 2');
-                console.log('befor function point: ', this.point1 || this.point2, ' slope: ' + this.slope);
+                // console.log('befor function point: ', this.point1 || this.point2, ' slope: ' + this.slope);
                 this.n = calculateNOfLineFunction({ point: this.point1 || this.point2, slope: this.slope })
             }
         }
-        console.log("after- n=" + this.n)
+        // console.log("after- n=" + this.n)
         return this.n
     }
 
     getPointOnXAsis() {
         console.log('slope: ' + this.Slope);
-        if (this.slope) {
-            console.log('slope in if: ' + this.slope);
+        if (this.Slope) {
+            // console.log('slope in if: ' + this.slope);
             return this.getPointByX(0)
         }
         // console.log(this.slope);
@@ -101,10 +95,10 @@ class Line {
     isPointOnLine(point) {
         //מקבל נקודה ובודק האם היא קיימת על הישר
         const slope2 = calculateSlope(this.point1 || this.point2, point)
-        console.log('slope2: ' + slope2, this.Slope);
+        // console.log('slope2: ' + slope2, this.Slope);
         if (this.Slope === slope2) {
             const n2 = calculateNOfLineFunction({ point, slope: slope2 })
-            console.log('n2: ' + n2, this.N);
+            // console.log('n2: ' + n2, this.N);
             if (this.N === n2) {
                 return true
             }
@@ -114,15 +108,15 @@ class Line {
 
     getPointByX(x) {
         //אם יש שיפוע ונקודת מפגש עם ציר ה x הוא מחזיר נקודה חדשה עם ה y המחושב
-        console.log('N: ' + this.N);
+        // console.log('N: ' + this.N);
         if (this.Slope && this.N) {
-            console.log('this.slope, this.n: ' + this.Slope, this.N)
+            // console.log('this.slope, this.n: ' + this.Slope, this.N)
             let y = this.slope * x + this.n
-            console.log("y: " + y)
+            // console.log("y: " + y)
             return new Point({ x, y })
         }
         else {
-            console.log('this.slope,this.n: ' + this.slope, this.n)
+            // console.log('this.slope,this.n: ' + this.slope, this.n)
             throw new Error('there is not slope or n in this line for get point by x')
         }
 
