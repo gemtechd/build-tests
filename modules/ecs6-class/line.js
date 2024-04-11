@@ -26,6 +26,8 @@ class Line {
     }
 
     get Points() {
+        if (!this.point1 || !this.point2)
+            throw new Error('point is undefined')
         return { point1: this.point1, point2: this.point2 }
     }
 
@@ -72,8 +74,7 @@ class Line {
         }
         return undefined
     }
-    // ISSUE
-    //TODO
+
     isPointOnLine(point) {
         const slope2 = calculateSlope(this.point1 || this.point2, point)//I added |
         // console.log('slope2', slope2)

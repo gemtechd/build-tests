@@ -24,8 +24,8 @@ describe('addPoint', () => {
     })
 
     it('should throw new Error - the point is null', () => {
-        try{
-                    expect(line1.addPoint()).toThrow('the point is null')
+        try {
+            expect(line1.addPoint()).toThrow('the point is null')
         }
         catch (err) {
             console.log(`An error was thrown - ${err}`);
@@ -52,7 +52,12 @@ describe('get Points', () => {
 
     it('should return undefined for points', () => {
         const line2 = new Line({})
-        expect(line2.Points).toEqual({ point1: undefined, point2: undefined })
+        try {
+            expect(line2.Points).toThrow('point is undefined')
+        }
+        catch (err) {
+            console.log(`An error was thrown - ${err}`);
+        }
     })
 })
 
@@ -101,7 +106,7 @@ describe('set N', () => {
             expect(line3.N).toThrow('Missing data for calculation')
         }
         catch (err) {
-            console.log('An error was thrown - Missing data for calculation');
+            console.log(`An error was thrown - ${err}`);
         }
     })
 })

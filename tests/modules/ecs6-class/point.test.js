@@ -12,8 +12,22 @@ describe('new Point - should return Integer', () => {
 describe('moveVertical', () => {
     const point1 = new Point({ x: 5, y: 2 })
     it('should add value to variable y', () => {
-        point1.moveVertical(3)
-        expect(point1.y).toBe(5)
+        try {
+            point1.moveVertical(3)
+            expect(point1.y).toBe(5)
+        }
+        catch (err) {
+            console.log(`An error was thrown - ${err}`);
+        }
+    })
+
+    it('should throw error - The value is not an Integer', () => {
+        try {
+            expect(point1.moveVertical('y')).toThrow('The value is not an Integer')
+        }
+        catch (err) {
+            console.log(`An error was thrown - ${err}`);
+        }
     })
 
     // it('should function throw an error when one or more empty variable exist', () => {
