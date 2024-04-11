@@ -4,11 +4,9 @@ class Point {
         this.y = y;
     }
     moveVertical(value) {
-        //מזיז את הנקודה במאונך
         this.y += value;
     }
     moveHorizontal(value) {
-        //מזיז את הנקודה אופקית
         this.x += value;
     }
 }

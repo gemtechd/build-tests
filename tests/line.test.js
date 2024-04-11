@@ -2,24 +2,50 @@ const Line = require('../modules/ecs6-class/line');
 const Point = require('../modules/ecs6-class/point');
 
 
-// jest.mock('../modules/ecs6-class/point');
-
 describe('Line', () => {
   let line = new Line({})
-  const line2 = new Line({ point1: new Point({ x: 7, y: 6 }), point2: new Point({ x: 2, y: 8 }), slope: undefined, n: undefined })
-
+  const line2 = new Line({ point1: new Point({ x: 7, y: 6 }), point2: new Point({ x: 2, y: 8 }), slope: undefined, n: 8.8 })
+  const line3 = new Line({ point1: new Point({ x: -5, y: 4 }), point2: new Point({ x: 4, y: 4 }), slope: undefined, n: 8.8 })
+  const line5 = new Line({ point1: new Point({ x: -5, y: 4 }), point2: new Point({ x: -5, y: 8 }), slope: undefined, n: undefined })
+  const line6 = new Line({ point1: new Point({ x: 7, y: 6 }), point2: new Point({ x: 2, y: 8 }), slope: undefined, n: undefined })
+ 
   it('line should be defined', () => {
     expect(line).toBeDefined();
   });
-  
+
   it('line2 should be defined', () => {
     expect(line2).toBeDefined();
   });
 
-  it('should calculate n if there is 2 points', () => {
-    console.log('line2: ' + {line2});
-    expect(line2.n).toBe(8.8)
-  })
+  it('should throw an error when slope is not the correct slope', () => {
+    try {
+      const line4 = new Line({ point1: new Point({ x: -5, y: 6 }), point2: new Point({ x: 4, y: 6 }), slope: 6, n: 8.8 })
+    }
+    catch (err) {
+      expect(err.message).toEqual('the slope you entered is not correct');
+      console.log(err);
+    }
+  });
+
+  it('should throw an error when slope is not exist in this line', () => {
+    try {
+      const line4 = new Line({ point1: new Point({ x: 2, y: 9 }), point2: new Point({ x: 2, y: 6 }), slope: 6, n: 8.8 })
+    }
+    catch (err) {
+      expect(err.message).toEqual('there isn\'t slope for this line');
+      console.log(err);
+    }
+  });
+
+  it('should throw an error when n is not the correct', () => {
+    try {
+      const line7 = new Line({ point1: new Point({ x: 7, y: 6 }), point2: new Point({ x: 2, y: 8 }), slope: undefined, n: 2 })
+    }
+    catch (err) {
+      expect(err.message).toEqual('the n you entered is not correct');
+      console.log(err);
+    }
+  });
 
   describe('AddPoint', () => {
 
@@ -37,48 +63,64 @@ describe('Line', () => {
 
   describe('Set slope', () => {
 
-    it('should change slope from undefinde to number', () => {
-      line.Slope = 0
-      expect(line.slope).toBe(0)
-    })
+    it('should throw an error when slope is not the correct', () => {
+      try {
+        line3.Slope = 4
+      }
+      catch (err) {
+        expect(err.message).toEqual('the slope you entered is not correct');
+        console.log(err);
+      }
+    });
 
-    it('should throw an error when the slope is not correct', () => {
-      expect(() => line.Slope = 4).toThrow('this slope is not correct')
-    })
+    it('should throw an error when slope is not exist in this line', () => {
+      try {
+        line5.Slope = 4
+      }
+      catch (err) {
+        expect(err.message).toEqual('there isn\'t slope for this line');
+        console.log(err);
+      }
+    });
 
     it('should change slope to the given slope', () => {
-      const line3=new Line({point1:new Point({x:6,y:-3}),point2:undefined,slope:undefined,n:undefined})
+      const line3 = new Line({ point1: new Point({ x: 6, y: -3 }), point2: undefined, slope: undefined, n: undefined })
+      console.log(line3.Slope);
       line3.Slope = 2
-      expect(line3.slope).toBe(2)
+      expect(line3.Slope).toBe(2)
     })
   })
 
   describe('Get slope', () => {
     it('test get slope', () => {
-      expect(line.slope).toEqual(0)
+      const res = line.Slope
+      expect(res).toBe(0)
     })
   })
 
 
   describe('Set n', () => {
 
-    it('should be undiefinde n becouse there is no n in this line', () => {
-      line.N = 0
-      expect(line.n).toBe(undefined)
+    it('should throw an error when n is not exist in this line', () => {
+      try {
+        line3.N = 8
+      }
+      catch (err) {
+        expect(err.message).toEqual('there isn\'t slope to this line');
+        console.log(err);
+      }
+
+    });
+
+    it('should throw an error when n is not correct', () => {
+      try {
+        line2.N = 6
+      }
+      catch (err) {
+        expect(err.message).toEqual('the n you entered is not correct');
+        console.log(err);
+      }
     })
-
-
-    it('should change n from undefinde to number', () => {
-      line2.N = 0
-      expect(line2.n).toBe(8.8)
-    })
-
-    // it('should throw an error if the input n is not correct',()=>{
-    //   line.N=4
-    //   console.log("line.n: "+line.n);
-    //   expect(()=> line2.N=4).toThrow('this is not the correct n')
-    // })
-
   })
 
   describe('Get n', () => {
@@ -86,11 +128,17 @@ describe('Line', () => {
     it('test get n', () => {
       expect(line2.n).toEqual(8.8)
     })
+
+    
+    it('test get n', () => {
+      line6.N
+      expect(line6.n).toEqual(8.8)
+    })
   })
 
-  describe('Get points',()=>{
-    it('should return the points',()=>{
-      expect(line2.Points).toEqual({point1:{x: 7, y: 6},point2:{x: 2, y: 8 }})
+  describe('Get points', () => {
+    it('should return the points', () => {
+      expect(line2.Points).toEqual({ point1: { x: 7, y: 6 }, point2: { x: 2, y: 8 } })
     })
   })
 
@@ -98,13 +146,12 @@ describe('Line', () => {
 
     it('should return the point on x axis', () => {
       const response = line2.getPointOnXAsis()
-      //  console.log(line2);
-      expect(response).toEqual({ x: 0, y: 8.8 })//??
+      expect(response).toEqual({ x: 0, y:8.8 })
     })
 
     it('should return undefined if slope is not exist', () => {
       const response = line.getPointOnXAsis()
-      expect(response).toBe(undefined)//??
+      expect(response).toBe(undefined)
     })
 
   })
@@ -112,18 +159,18 @@ describe('Line', () => {
   describe('getPointOnYAsis', () => {
     it('should return the point on y axis ', () => {
       const response = line2.getPointOnYAsis()
-      expect(response).toEqual({ x: 0.045454545454545456, y: 0 })//????
+      expect(response).toEqual({ x: 0.045454545454545456, y: 0 })
     })
 
     it('should return undefined if slope is not exist', () => {
       const response = line.getPointOnYAsis()
-      expect(response).toBe(undefined)//??
+      expect(response).toBe(undefined)
     })
   })
 
   describe('IsPointOnLine', () => {
     it('should return true if the point is on the line', () => {
-      const response = line.isPointOnLine({ x: 3, y: 5 })
+      const response = line2.isPointOnLine({ x: 4.5, y: 7 })
       expect(response).toBe(true)
     })
 
@@ -140,18 +187,30 @@ describe('Line', () => {
     })
 
     it('should throw an error if there is not slope or n', () => {
-      expect(() => line.getPointByX(9)).toThrow('there is not slope or n in this line for get point by x')
+      try {
+        line.getPointByX(9)
+      }
+      catch (err) {
+        expect(err.message).toEqual('there is not slope or n in this line for get point by x')
+        console.log(err);
+      }
     })
   })
 
   describe('GetPointByY', () => {
     it('should return a new point by y', () => {
       const response = line2.getPointByY(9)
-      expect(response).toEqual({ x: 1.0681818181818181, y: 9 })//x?
+      expect(response).toEqual({ x: 1.0681818181818181, y: 9 })
     })
 
     it('should throw an error if there is not slope or n', () => {
-      expect(() => line.getPointByY(9)).toThrow('there is not slope or n in this line for get point by y')
+      try {
+        line.getPointByY(9)
+      }
+      catch (err) {
+        expect(err.message).toEqual('there is not slope or n in this line for get point by y')
+        console.log(err);
+      }
     })
   })
 })

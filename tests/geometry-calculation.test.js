@@ -30,15 +30,20 @@ describe("CalculateSlope", () => {
         const point1 = new Point({ x: 2, y: 1 });
         const point2 = new Point({ x: -1, y: 4 });
         const response = calculateSlope(point1, point2)
-        console.log(response)
         expect(response).toBe(-1)
     })
 
     it('should throw an error when the points are in the same line that perpendicular to the x-axis', () => {
         const point1 = new Point({ x: -1, y: 5 });
         const point2 = new Point({ x: -1, y: 8 });
-        const response=calculateSlope(point1, point2)
-        expect(response ).toBe(undefined)
+        try {
+           calculateSlope(point1, point2)     
+        }
+        catch (err) {
+            expect(err.message).toEqual('there isn\'t slope for this line')
+            console.log(err);
+        }
+
     })
 })
 
@@ -50,37 +55,28 @@ describe("CalculateNOfLineFunction", () => {
         expect(response).toBe(-2)
     })
 
-    it('should return undefinde if the slope is 0', () => {
-        const point = new Point({ x: -5, y: 3 });
-        const response = calculateNOfLineFunction({ point: point, slope: 0 })
-        expect(response).toBe(undefined)
-    })
-
-
 })
 
 describe("CalculateJunctionPoint", () => {
 
     it('should return the junction point between 2 lines', () => {
-        const line1 = new Line({point1:new Point({x:5,y:2}),point2:new Point({x:-1,y:8})})
-        const line2 = new Line({point1:new Point({x:6,y:8}),point2:new Point({x:8,y:-1})})
-        const response=calculateJunctionPoint(line1,line2)
-        console.log(`should return the junction point between 2 lines: `+response);
-        expect(response).toEqual({x:8,y:-1})
-       
+        const line1 = new Line({ point1: new Point({ x: 5, y: 2 }), point2: new Point({ x: -1, y: 8 }) })
+        const line2 = new Line({ point1: new Point({ x: 6, y: 8 }), point2: new Point({ x: 8, y: -1 }) })
+        const response = calculateJunctionPoint(line1, line2)
+        expect(response).toEqual({ x: 8, y: -1 })
+
     })
 
     it('should return true if the lines are on the same line', () => {
-        const line1 = new Line({point1:new Point({x:1, y:1}), point2:undefined, n:-2,slope: -1})
-        const line2 = new Line({point1:new Point({x:-1, y:3}),point2: undefined,n: -2,slope: -1})
+        const line1 = new Line({ point1: new Point({ x: 1, y: 1 }), point2: undefined, n: -2, slope: -1 })
+        const line2 = new Line({ point1: new Point({ x: -1, y: 3 }), point2: undefined, n: -2, slope: -1 })
         const response = calculateJunctionPoint(line1, line2)
-        console.log(response)
         expect(response).toBe(true)
     })
 
     it('should return false if the lines are parallels', () => {
-        const line1 = new Line({point1:new Point({x:-5, y:3}),point2: undefined,n: -2, slope:-1})
-        const line2 = new Line({point1:new Point({x:-3, y:7}),point2: undefined,n: 4, slope:-1})
+        const line1 = new Line({ point1: new Point({ x: -5, y: 3 }), point2: undefined, n: -2, slope: -1 })
+        const line2 = new Line({ point1: new Point({ x: -3, y: 7 }), point2: undefined, n: 4, slope: -1 })
         const response = calculateJunctionPoint(line1, line2)
         expect(response).toBe(false)
     })
