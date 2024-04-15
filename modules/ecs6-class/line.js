@@ -9,12 +9,18 @@ class Line {
         this.n = n;
     }
     addPoint(point) {
-        if (this.point1 === undefined) {
-            this.point1 = point
+        if (!point) {
+           throw Error('eee')
+
         }
         else {
-            if (this.point2 === undefined) {
-                this.point2 = point
+            if (this.point1 === undefined) {
+                this.point1 = point
+            }
+            else {
+                if (this.point2 === undefined) {
+                    this.point2 = point
+                }
             }
         }
     }
@@ -50,14 +56,14 @@ class Line {
 
     getPointOnXAsis() {
         if (this.slope) {
-            return this.getPointByX(0)
+            return this.getPointByY(0)
         }
         return undefined
     }
 
     getPointOnYAsis() {
         if (this.slope) {
-            return this.getPointByY(0)
+            return this.getPointByX(0)
         }
         return undefined
     }
