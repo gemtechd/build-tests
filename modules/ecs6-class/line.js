@@ -2,15 +2,19 @@ const { calculateSlope, calculateNOfLineFunction } = require("../geometry-calcul
 const Point = require("./point");
 
 class Line {
-    constructor({ point1 = undefined, point2 = undefined, n = undefined, slope = undefined }) {
+    constructor( {point1 = undefined, point2 = undefined, n = undefined, slope = undefined }) {
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
         this.n = n;
     }
     addPoint(point) {
+        if (!point) {
+            throw new Error("exist empty property");
+        }
         if (this.point1 === undefined) {
-            this.point1 = point
+            this.point1 = new Point(point);
+            
         }
         else {
             if (this.point2 === undefined) {
@@ -20,10 +24,14 @@ class Line {
     }
 
     get Points() {
-        return { point1: this.point1, point2: this.point2 }
+        return { point1: this.point1, point2: this.point2 };
     }
 
     set Slope(slope) {
+        if(!slope)
+           {
+            throw new Error("the value is empty");
+           }
         this.slope = slope;
     }
 
@@ -37,6 +45,9 @@ class Line {
     }
 
     set N(n) {
+        if(!n){
+            throw new Error("the value is empty");  
+        }
         this.n = n;
     }
 
@@ -73,13 +84,19 @@ class Line {
     }
 
     getPointByX(x) {
+        if(!x && x!==0){
+            throw new error("the value is empty");
+        }
         if (this.slope && this.n) {
             let y = this.slope * x + this.n
-            return new Point({ x, y })
+            return new Point({ x, y });
         }
     }
 
     getPointByY(y) {
+        if(!y&& y!==0){
+            throw new error("the value is empty");  
+        }
         if (this.slope && this.n) {
             let x = (y - this.slope) / this.n;
             return new Point({ x, y })
