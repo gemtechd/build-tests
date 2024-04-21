@@ -1,5 +1,5 @@
 const { calculateDistance, calculateJunctionPoint, calculateAngle, calculateNOfLineFunction, calculateSlope }
-    = require("../../modules/geometry-calculation")
+ = require("../../modules/geometry-calculation")
 const Point = require("../../modules/ecs6-class/point")
 const Line = require("../../modules/ecs6-class/line")
 

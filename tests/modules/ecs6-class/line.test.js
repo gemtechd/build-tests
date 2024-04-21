@@ -74,11 +74,11 @@ describe("getPointOnYAsis",()=>{
     
     it("return the correct answer When a line has a slope",()=>{
         line = new Line({ point1: { x: 1, y: 4 }, point2: { x: 3, y: 2 }, n: 5, slope: -1 });
-        expect(line.getPointOnXAsis()).toEqual({x:0,y:5});
+        expect(line.getPointOnYAsis()).toEqual({x:5,y:0});
     })
     it("return the correct answer When a line doesn't have a slope",()=>{
         line = new Line({ point1: { x: 0, y: 4 }, point2: { x: 0, y: 4 }, n: undefined, slope: undefined });
-        expect(line.getPointOnXAsis()).toBe(undefined);
+        expect(line.getPointOnYAsis()).toBe(undefined);
     })
 })
 describe("isPointOnLine", () => {
@@ -101,7 +101,7 @@ describe("getPointByX", () => {
     });
     it('throw an Error when one or more empty variable exist', () => {
         try { line.getPointByX() }
-        catch (e) { expect(e.message).toBe("exit empty property") }
+        catch (e) { expect(e.message).toBe("an empty attribute exists") }
     });
 });
 describe("getPointByY", () => {
@@ -112,7 +112,7 @@ describe("getPointByY", () => {
     });
     it('throw an Error when one or more empty variable exist', () => {
         try { line.getPointByY() }
-        catch (e) { expect(e.message).toBe("exit empty property") }
+        catch (e) { expect(e.message).toBe("an empty attribute exists") }
     });
 });
 

@@ -19,12 +19,10 @@ describe("moveVertical", () => {
         point.moveHorizontal(5)
         console.log(point.x)
         expect(point.x).toBe(6)
-    });
-});
-describe("moveHorizontal", () => {
-    it("return the correct answer", () => {
+    })
+    it("throw an error when the value is undifind", () => {
         const point = new Point({x:1, y:1})
         try{point.moveHorizontal()}
         catch(e){expect(e.message).toBe("the x is undefined")}
-    });
+    })
 });

@@ -97,7 +97,7 @@ class Line {
 //y- ה
     getPointByX(x) {
         if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
-            throw new Error("exit empty property")
+            throw new Error("an empty attribute exists")
         if (this.slope && this.n) {
             let y = this.slope * x + this.n
             return new Point({ x, y })
@@ -107,7 +107,7 @@ class Line {
 //x- ה
     getPointByY(y) {
         if(this.point1==null||this.point2===undefined||this.point2==null||this.point2===undefined)
-            throw new Error("exit empty property")
+            throw new Error("an empty attribute exists")
         if (this.slope && this.n) {
             let x = (y - this.n) / this.slope;
             return new Point({ x, y })
