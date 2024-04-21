@@ -43,21 +43,56 @@ describe("getPoints", () => {
 
     })
 })
-describe("setSlope",()=>{
+//describe("setSlope",()=>{
+//    let line;
+//it('throw an Error when the value of slope is undifind',()=>{
+//   line = new Line({ point1: { x: 0, y: 5 }, point2: { x: 3, y: 2 }, n: 5})
+//    let slope;
+//    try{line.Slope(slope)}
+//    catch (e) {expect(e.message).toBe("the value of slope is undefined")}
+//})
+//it('throw an Error when the value of slope is not a Number',()=>{
+//    line = new Line({ point1: { x: 0, y: 5 }, point2: { x: 3, y: 2 }, n: 5})
+//    try{line.Slope('a')}
+//    catch (e) {expect(e.message).toBe("the value of slope is not a number")}
+//})
+//})
+describe("getPointOnXAsis",()=>{
     let line;
-    //it('throw an Error when the value of slope is undifind',()=>{
-    //   line = new Line({ point1: { x: 0, y: 5 }, point2: { x: 3, y: 2 }, n: 5})
-    //    let slope;
-    //    try{line.Slope(slope)}
-    //    catch (e) {expect(e.message).toBe("the value of slope is undefined")}
-    //})
-    //it('throw an Error when the value of slope is not a Number',()=>{
-    //    line = new Line({ point1: { x: 0, y: 5 }, point2: { x: 3, y: 2 }, n: 5})
-    //    try{line.Slope('a')}
-    //    catch (e) {expect(e.message).toBe("the value of slope is not a number")}
-    //})
+    
+    it("return the correct answer When a line has a slope",()=>{
+        line = new Line({ point1: { x: 1, y: 4 }, point2: { x: 3, y: 2 }, n: 5, slope: -1 });
+        expect(line.getPointOnXAsis()).toEqual({x:0,y:5});
+    })
+    it("return the correct answer When a line doesn't have a slope",()=>{
+        line = new Line({ point1: { x: 0, y: 4 }, point2: { x: 0, y: 4 }, n: undefined, slope: undefined });
+        expect(line.getPointOnXAsis()).toBe(undefined);
+    })
 })
-
+describe("getPointOnYAsis",()=>{
+    let line;
+    
+    it("return the correct answer When a line has a slope",()=>{
+        line = new Line({ point1: { x: 1, y: 4 }, point2: { x: 3, y: 2 }, n: 5, slope: -1 });
+        expect(line.getPointOnXAsis()).toEqual({x:0,y:5});
+    })
+    it("return the correct answer When a line doesn't have a slope",()=>{
+        line = new Line({ point1: { x: 0, y: 4 }, point2: { x: 0, y: 4 }, n: undefined, slope: undefined });
+        expect(line.getPointOnXAsis()).toBe(undefined);
+    })
+})
+describe("isPointOnLine", () => {
+    let line = new Line({ point1: { x: 0, y: 5 }, point2: { x: 3, y: 2 }, n: 5, slope: -1 });
+    let point;
+    it("return the correct answer when the point is on the line", () => {
+        point=new Point({x:1,y:4})
+        expect(line.isPointOnLine(point)).toBe(true)
+    })
+    it("return the correct answer when the point isn't on the line", () => {
+        point=new Point({x:1,y:5})
+        expect(line.isPointOnLine(point)).toBe(false)
+    })
+})
 describe("getPointByX", () => {
     let line;
     it('return the correct answer', () => {

@@ -77,13 +77,20 @@ class Line {
         return undefined
     }
     isPointOnLine(point) {
-        const slope2 = calculateSlope(this.point1 | this.point2, point)
+        //מחשב שיפוע של הנקודה לפי הנקודה הנבדקת ואחת הנקודות שעל הישר
+        const slope2 = calculateSlope(this.point1 || this.point2, point)
+        //אם השיפוע של הישר ושל הנקודה שווים
         if (this.slope === slope2) {
+            //תחשב את 
+            //n
+            //לפי הנקודה שהתקבלה והשיפוע השווה
             const n2 = calculateNOfLineFunction({ point, slope: slope2 })
             if (this.n === n2) {
+                //הנקודה נמצאת על אותו ישר
                 return true
             }
         }
+        //נמצאת על ישר מקביל
         return false
     }
 //מחזיר את נקודת המפגש של הנקודה עם ציר
