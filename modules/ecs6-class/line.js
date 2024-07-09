@@ -9,7 +9,10 @@ class Line {
     }
 
     calculateSlope = () => {
-        this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
+        if ((this.point1.x - this.point2.x) != 0)
+            this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
+        else
+            throw new Error('Division by zero')
     }
 
     calculateNOfLineFunction = () => {
@@ -31,9 +34,11 @@ class Line {
     }
 
     getPointByY(y) {
-        let x = (y - this.slope) / this.n;
-        return new Point({ x, y })
+        if (this.slope != 0) {
+            let x = (y - this.n) / this.slope;
+            return new Point({ x, y })
+        } else
+            throw new Error('Division by zero')
     }
 }
-
 module.exports = Line
