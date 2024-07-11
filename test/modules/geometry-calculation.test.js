@@ -1,3 +1,4 @@
+
 const { calculateDistance, calculateJunctionPoint, isPointOnLine } = require('../../modules/geometry-calculation')
 const Point = require('../../modules/ecs6-class/point')
 const Line = require('../../modules/ecs6-class/line')

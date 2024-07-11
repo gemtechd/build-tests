@@ -1,5 +1,6 @@
 class Point {
     constructor({ x = 0, y = 0 } = {}) {
+        console.log('hi!');
         if (typeof (x) === "number" && typeof (y) === "number") {
             this.x = x;
             this.y = y;

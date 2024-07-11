@@ -1,5 +1,8 @@
 const Line = require('../../../modules/ecs6-class/line')
 const Point = require('./../../../modules/ecs6-class/point')
+const {calculateSlope} =require('../../../modules/ecs6-class/line')
+const mockConstructor=jest.fn(constructor)
+const mockCalculateSlope=jest.fn(calculateSlope)
 describe('LINE`S FUNCTION', () => {
   describe('CONSTRUCTOR', () => {
     it('should instantiate the class with the correct values', () => {
@@ -10,21 +13,21 @@ describe('LINE`S FUNCTION', () => {
   }),
     describe('CALCULATE_SLOPE', () => {
       it('should return the slope of a straight line by two points', () => {
-        const l = new Line({ point1: new Point({ x: 3, y: 6 }), point2: new Point({ x: 1, y: 2 }) })
+        const l = mockConstructor(new Line({ point1: new Point({ x: 3, y: 6 }), point2: new Point({ x: 1, y: 2 }) }))
         l.calculateSlope()
         expect(l.slope).toBe(2)
       })
 
 
       it('should throw an error if division by zero occurs', () => {
-        const l = new Line({ point1: new Point({ x: 3, y: 6 }), point2: new Point({ x: 3, y: 2 }) })
+        const l =mockConstructor(new Line({ point1: new Point({ x: 3, y: 6 }), point2: new Point({ x: 3, y: 2 }) }))
         expect(() => l.calculateSlope()).toThrowError('Division by zero')
       })
     }),
     describe('CALCULATE_N_Of_LINE_FUNCTION', () => {
       it('should return the point of intersection of the line with the y-axis', () => {
-        const l = new Line({ point1: new Point({ x: 3, y: 6 }), point2: new Point({ x: 1, y: 2 }) })
-        l.calculateSlope()
+        const l = mockConstructor(new Line({ point1: new Point({ x: 3, y: 6 }), point2: new Point({ x: 1, y: 2 }) }))
+        mockCalculateSlope(l)
         l.calculateNOfLineFunction()
         expect(l.n).toBe(0)
       })
