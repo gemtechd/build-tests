@@ -30,10 +30,12 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
+
     if (!(line instanceof Line) || !(point instanceof Point)) {
         throw new Error("The objects should be of the Line and Point types")
     }
-    const proxyLine = new Line({ point1: line.point1, point2: point })//0,y
+  
+    const proxyLine = new Line({ point1: line.point1, point2: point })
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
         proxyLine.calculateNOfLineFunction()
