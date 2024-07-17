@@ -2,8 +2,10 @@ const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
-        if ((typeof (n) !== 'number' && typeof (n) !== 'undefined') || (typeof (slope) !== 'number' && typeof (slope) !== 'undefined'))
-            throw Error('n or slope are not a number')
+        if (typeof (n) !== 'number' && typeof (n) !== 'undefined')
+            throw Error('n is not a number')
+        if (typeof (slope) !== 'number' && typeof (slope) !== 'undefined')
+            throw Error('slope is not a number')
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;

@@ -25,11 +25,10 @@ describe('LINE', () => {
             expect(line.slope).toBe(2);
         });
         it('should throw error when the values are not a numbers', () => {
-            expect(() => Line(new Line({ n: 3, slope: "5" }))).toThrow('n or slope are not a number')
-            expect(() => Line(new Line({ n: '3', slope: "5" }))).toThrow('n or slope are not a number')
-            expect(() => Line(new Line({ n: '3', slope: 2 }))).toThrow('n or slope are not a number')
-            expect(() => Line(new Line({ n: [5, 7], slope: "5" }))).toThrow('n or slope are not a number')
-            expect(() => Line(new Line({ n: 3, slope: { x: 7, y: 5 } }))).toThrow('n or slope are not a number')
+            expect(() => Line(new Line({ n: 3, slope: "5" }))).toThrow('slope is not a number')
+            expect(() => Line(new Line({ n: '3', slope: 3 }))).toThrow('n is not a number')
+            expect(() => Line(new Line({ n: [5, 7], slope: 6 }))).toThrow('n is not a number')
+            expect(() => Line(new Line({ n: 3, slope: { x: 7, y: 5 } }))).toThrow('slope is not a number')
         })
     })
 

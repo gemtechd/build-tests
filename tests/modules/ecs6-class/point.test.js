@@ -17,11 +17,10 @@ describe('POINT', () => {
     })
 
     it('should throw error when the values are not a numbers', () => {
-      expect(() => Point(new Point({ x: 3, y: "5" }))).toThrow('x or y are not a number')
-      expect(() => Point(new Point({ x: '3', y: "5" }))).toThrow('x or y are not a number')
-      expect(() => Point(new Point({ x: '3', y: 2 }))).toThrow('x or y are not a number')
-      expect(() => Point(new Point({ x: [5, 7], y: "5" }))).toThrow('x or y are not a number')
-      expect(() => Point(new Point({ x: 3, y: { x: 7, y: 5 } }))).toThrow('x or y are not a number')
+      expect(() => Point(new Point({ x: 3, y: "5" }))).toThrow('y is not a number')
+      expect(() => Point(new Point({ x: '3', y: 5 }))).toThrow('x is not a number')
+      expect(() => Point(new Point({ x: [5, 7], y: 8 }))).toThrow('x is not a number')
+      expect(() => Point(new Point({ x: 3, y: { x: 7, y: 5 } }))).toThrow('y is not a number')
     })
   })
 
