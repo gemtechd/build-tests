@@ -1,11 +1,10 @@
 class Point {
     constructor({ x = 0, y = 0 } = {}) {
-        console.log('hi!');
         if (typeof (x) === "number" && typeof (y) === "number") {
             this.x = x;
             this.y = y;
-        } else
-            throw new Error('the type of the numbers is not correctly')
+        } else{
+            throw new Error('the type of the numbers is not correctly')}
     }
     moveVertical(value) {
         if (typeof (value) === "number")
