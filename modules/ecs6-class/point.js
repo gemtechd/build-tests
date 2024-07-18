@@ -1,6 +1,7 @@
 class Point {
 
     constructor({ x = 0, y = 0 } = {}) {
+    
         if (typeof (x) !== "number" && typeof (y) != "number") {
             throw Error('x  and y are not number')
         }
