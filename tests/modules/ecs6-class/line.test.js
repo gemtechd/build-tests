@@ -84,7 +84,7 @@ describe('CALCULATE_N_OF_LINE_FUNCTION', () => {
         expect(line.n).toBe(3);
 
     })
-
+    
 })
 
 describe('GET_POINT_BY_X', () => {
