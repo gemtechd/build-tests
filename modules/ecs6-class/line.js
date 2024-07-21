@@ -1,7 +1,7 @@
 const Point = require("./point");
 
 class Line {
-    constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
+    constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }={}) {
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
@@ -25,12 +25,18 @@ class Line {
     }
 
 
-    getPointByX(x) {
+    getPointByX(x=0) {
+        if(typeof(x)!='number'){
+            throw new Error('value must be a number')
+        }
         let y = this.slope * x + this.n
         return new Point({ x, y })
     }
 
-    getPointByY(y) {
+    getPointByY(y=0) {
+        if(typeof(y)!='number'){
+            throw new Error('value must be a number')
+        }
         let x = (y - this.n) / this.slope;
         return new Point({ x, y })
     }
