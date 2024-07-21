@@ -6,12 +6,16 @@ class Line {
         this.point2 = point2;
         this.slope = slope;
         this.n = n;
+        if ((this.slope !== undefined && typeof (this.slope) !== 'number') || (this.n !== undefined && typeof (this.n) !== 'number'))
+            throw Error('this value is not a number')
     }
 
     calculateSlope = () => {
-        this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
+        if (this.point1.x === this.point2.x)
+            throw Error("Division by zero occurred")
+        else
+            this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
     }
-
     calculateNOfLineFunction = () => {
         this.n = this.point1.y - this.slope * this.point1.x
     }
@@ -26,13 +30,25 @@ class Line {
 
 
     getPointByX(x) {
-        let y = this.slope * x + this.n
-        return new Point({ x, y })
+        if (typeof (x) !== "number")
+            throw Error("this value is not a number")
+        else {
+            let y = this.slope * x + this.n
+            return new Point({ x, y })
+        }
     }
 
     getPointByY(y) {
-        let x = (y - this.slope) / this.n;
-        return new Point({ x, y })
+        if (typeof (y) !== "number")
+            throw Error("this value is not a number")
+        else {
+            if (this.slope === 0)
+                throw Error("Division by zero occurred")
+            else {
+                let x = (y - this.n) / this.slope;
+                return new Point({ x, y })
+            }
+        }
     }
 }
 
