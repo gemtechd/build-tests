@@ -1,4 +1,4 @@
-const { Point } = require('../../../modules/ecs6-class/point');
+const Point = require('../../../modules/ecs6-class/point');
 const mockConstructor = jest.fn(constructor);
 
 let point
@@ -10,18 +10,24 @@ describe('CONSTRUCTOR', () => {
     point = new Point();
     expect(point.x).toBe(0);
     expect(point.y).toBe(0);
+  })
+
+  it('should initialize y to default value when no parameters are provided', () => {
     point = new Point({ x: 4 })
     expect(point.x).toBe(4);
     expect(point.y).toBe(0);
+  })
+
+  it('should initialize x to default value when no parameters are provided', () => {
     point = new Point({ y: 3 })
     expect(point.x).toBe(0);
     expect(point.y).toBe(3);
+  })
 
 
-  });
 
   it('should throw error when x or y is not number ', () => {
-    expect(() => new Point({ x: '4', y: '3' })).toThrow('x and y is not number')
+    expect(() => new Point({ x: '4', y: '3' })).toThrow('x and y are not number')
     expect(() => new Point({ x: '4', y: 3 })).toThrow('x is not number');
     expect(() => new Point({ x: 4, y: '3' })).toThrow('y is not number');
 

@@ -1,4 +1,4 @@
-const { Point } = require('./point');
+const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
@@ -77,12 +77,7 @@ class Line {
     }
 }
 
-module.exports = {
-    Line, calculateSlope: Line.prototype.calculateSlope,
-    calculateNOfLineFunction: Line.prototype.calculateNOfLineFunction,
-    getPointOnXAsis: Line.prototype.getPointOnXAsis,
-    getPointOnYAsis: Line.prototype.getPointOnYAsis,
-    getPointByX: Line.prototype.getPointByX,
-    getPointByY: Line.prototype.getPointByY
-};
+module.exports = Line
+
+
 

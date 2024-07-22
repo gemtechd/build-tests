@@ -1,10 +1,11 @@
-class Point {
 
+
+class Point {
 
     constructor({ x = 0, y = 0 } = {}) {
 
         if (typeof (x) !== 'number' && typeof (y) !== 'number')
-            throw new Error('x and y is not number')
+            throw new Error('x and y are not number')
         if (typeof (x) !== 'number')
             throw new Error('x is not number')
         if (typeof (y) !== 'number')
@@ -33,4 +34,4 @@ class Point {
     }
 }
 
-module.exports = { Point, moveHorizontal: Point.prototype.moveHorizontal, moveVertical: Point.prototype.moveVertical };
+module.exports =Point
