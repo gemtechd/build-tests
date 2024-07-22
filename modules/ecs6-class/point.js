@@ -33,8 +33,7 @@ class Point {
 
 
 
-module.exports = {
-            Point:Point,
-            moveVertical: Point.prototype.moveVertical,
-            moveHorizontal: Point.prototype.moveHorizontal
-        };
+module.exports =  Point
+          
+            
+        

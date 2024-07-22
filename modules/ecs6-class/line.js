@@ -1,4 +1,4 @@
-const { Point } = require("./point");
+const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
@@ -18,10 +18,11 @@ class Line {
 
     calculateSlope = () => {
       if(this.point1.x === this.point2.x&&this.point1.y === this.point2.y){
-        throw new Error('The point1 is equal to the point2 so it is not a line')
+        throw new Error('Both points have the same values so it is not a line'
+        )
       }
         if(this.point1.x === this.point2.x){
-          throw new Error('The x of point1 is equal to the x of point2 so it is not a line')
+          throw new Error('The x of point1 is equal to the x of point2 so this line is not function')
         }
        
         this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
@@ -66,13 +67,6 @@ class Line {
     }
 }
 
-module.exports = {
-    Line,
-    calculateSlope: Line.prototype.calculateSlope,
-    calculateNOfLineFunction: Line.prototype.calculateNOfLineFunction,
-    getPointOnXAsis: Line.prototype.getPointOnXAsis,
-    getPointOnYAsis: Line.prototype.getPointOnYAsis,
-    getPointByX: Line.prototype.getPointByX,
-    getPointByY: Line.prototype.getPointByY
-
-};
+module.exports = Line
+  
+    

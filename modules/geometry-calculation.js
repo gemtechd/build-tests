@@ -1,6 +1,6 @@
 
-const { Line } = require("./ecs6-class/line");
-const { Point } = require("./ecs6-class/point");
+const Line = require("./ecs6-class/line");
+const Point = require("./ecs6-class/point");
 
 const calculateDistance = (point1, point2) => {
     if (!(point1 instanceof Point) || !(point2 instanceof Point)) {
@@ -23,8 +23,20 @@ const calculateJunctionPoint = (line1, line2) => {
     if (!(line2 instanceof Line)) {
         throw Error('line2 is not a line');
     }
-
+    if (!line1.slope) {
+        line1.calculateSlope()
+    }
+    if (!line2.slope) {
+        line2.calculateSlope()
+    }
+    if (!line1.n) {
+        line1.calculateNOfLineFunction()
+    }
+    if (!line2.n) {
+        line2.calculateNOfLineFunction()
+    }
     if (line1.slope === line2.slope) {
+
         if (line1.n === line2.n) {
             return true
         }
@@ -47,9 +59,15 @@ const isPointOnLine = (line, point) => {
 
     const proxyLine = new Line({ point1: line.point1, point2: point });
     proxyLine.calculateSlope();
-
+    if (!line.slope) {
+        line.calculateSlope()
+    }
+    if(!line.n){
+        line.calculateNOfLineFunction()
+    }
     if (line.slope === proxyLine.slope) {
         proxyLine.calculateNOfLineFunction();
+       
         if (line.n === proxyLine.n) {
             return true;
         }
