@@ -65,7 +65,6 @@ describe('CALCULATE_JUNCTION_POINT', () => {
         const result = calculateJunctionPoint(line, line1)
         expect(result).toBe(false);
     });
-    // -----------------
     it('should calculate the n value for line1 and then proceed with the calculation', () => {
 
         line = mockConstructor(new Line({ point1: new Point({ x: 4, y: 6 }), point2: new Point({ x: 7, y: 9 }), slope: 1 }))
@@ -87,11 +86,6 @@ describe('CALCULATE_JUNCTION_POINT', () => {
         const result = calculateJunctionPoint(line, line1)
         expect(result).toBe(false);
     });
-
-
-
-
-
 
     it('should return true for specific input', () => {
 

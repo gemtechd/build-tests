@@ -1,4 +1,3 @@
-
 const Point = require('../../../modules/ecs6-class/point')
 const mockConstructor = jest.fn(constructor);
 let point
