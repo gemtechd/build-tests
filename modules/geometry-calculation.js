@@ -1,13 +1,24 @@
 const Line = require('./ecs6-class/line')
+const Point = require('./ecs6-class/point')
 
 const calculateDistance = (point1, point2) => {
+    if (!point1 || !point2) {
+        throw new Error('missing data')
+    }
+    if (typeof (point1) != 'object' | typeof (point2) != 'object') {
+        throw new Error('argument must by type point')
+    }
+
     let distanceX = (point2.x - point1.x) ** 2;
-    let distanceY = (point2.y - point2.y) ** 2;
+    let distanceY = (point2.y - point1.y) ** 2;
     const distance = Math.sqrt(distanceX + distanceY);
     return distance;
 }
 
 const calculateJunctionPoint = (line1, line2) => {
+    if (line1 == undefined || line2 == undefined) {
+        throw new Error("missing data")
+    }
     if (line1.slope === line2.slope) {
         if (line1.n === line2.n) {
             return true
@@ -24,6 +35,9 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
+    if (line == undefined || point == undefined) {
+        throw new Error("missing data")
+    }
     const proxyLine = new Line({ point1: line.point1, point2: point })
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
