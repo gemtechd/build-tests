@@ -1,10 +1,14 @@
 const { calculateDistance, calculateJunctionPoint, isPointOnLine } = require('../../modules/geometry-calculation')
 const Line = require('../../modules/ecs6-class/line')
 const Point = require('../../modules/ecs6-class/point')
+const { getPointByX, calculateSlope, calculateNOfLineFunction } = require('../../modules/ecs6-class/line')
 
 
 const mockConstructorPoint = jest.fn(constructor);
 const mockConstructorLine = jest.fn(constructor);
+const mockGetPointByX = jest.fn(getPointByX);
+const mockCalculateSlope = jest.fn(calculateSlope)
+const mockCalculateNOfLineFunction = jest.fn(calculateNOfLineFunction)
 
 
 describe('CALCULATE_DISTANCE', () => {
@@ -32,6 +36,7 @@ describe('CALCULATE_JUNCTION_POINT', () => {
     it('should return true if two lines have the same slope and n value', () => {
         const line1 = mockConstructorLine(new Line({ slope: 1, n: 2 }));
         const line2 = mockConstructorLine(new Line({ slope: 1, n: 2 }));
+        mockGetPointByX()
         expect(calculateJunctionPoint(line1, line2)).toBe(true);
     });
     it('should return false if two lines not have the same slope and n value', () => {

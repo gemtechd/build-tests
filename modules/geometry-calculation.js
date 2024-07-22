@@ -2,7 +2,7 @@ const Line = require('./ecs6-class/line')
 const Point = require('./ecs6-class/point')
 
 const calculateDistance = (point1, point2) => {
-    if (!point1 && !point2)
+    if (!point1 || !point2)
         throw Error('point1 or point2 are undifined')
     if (!(point1 instanceof Point) || !(point2 instanceof Point))
         throw Error('point1 or point2 are not a pointObject')
@@ -13,7 +13,7 @@ const calculateDistance = (point1, point2) => {
 }
 
 const calculateJunctionPoint = (line1, line2) => {
-    if (!line1 && !line2)
+    if (!line1 || !line2)
         throw Error('line1 or line2 are undifined')
     if (!(line1 instanceof Line) || !(line2 instanceof Line))
         throw Error('line1 or line2 are not a LineObject')
@@ -33,7 +33,7 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
-    if (!line && !point)
+    if (!line || !point)
         throw Error('point or line are undifined')
     if (!(line instanceof Line) || !(point instanceof Point))
         throw Error('line or point are not a lineObject or a pointObject')
