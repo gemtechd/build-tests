@@ -8,11 +8,11 @@ class Line {
         this.n = n;
     }
 
-    calculateSlope = () => {
+    calculateSlope() {
         this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
     }
 
-    calculateNOfLineFunction = () => {
+    calculateNOfLineFunction() {
         this.n = this.point1.y - this.slope * this.point1.x
     }
 
