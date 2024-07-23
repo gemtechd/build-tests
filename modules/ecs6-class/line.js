@@ -2,6 +2,16 @@ const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
+        if (typeof(slope) !== "undefined" && typeof(slope) !== "number") {
+            throw new Error("slope is not valid!")
+        }
+
+        if (typeof(n) !== "undefined" && typeof(n) !== "number") {
+            throw new Error("n is not valid!")
+        }
+        if ((!(point1 instanceof Point)) || (!(point2 instanceof Point))) {
+            throw new Error("the object not instance of 'Point'!")
+        }
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
@@ -26,11 +36,25 @@ class Line {
 
 
     getPointByX(x) {
+        if (x === undefined) {
+            throw new Error('x is undefined!')
+        }
+        if (typeof (x) !== "number") {
+            throw new Error("x is not a number!")
+        }
+
         let y = this.slope * x + this.n
         return new Point({ x, y })
     }
 
     getPointByY(y) {
+        if (y === undefined) {
+            throw new Error('y is undefined!')
+        }
+        if (typeof (y) !== "number") {
+            throw new Error("y is not a number!")
+        }
+
         let x = (y - this.n) / this.slope;
         return new Point({ x, y })
     }
