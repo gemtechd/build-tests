@@ -24,6 +24,6 @@ When you run `npm run test`, all tests must succeed. When you run the `coverage`
 |  <span style="color:#00FF00">80% - 90%</span>|  <span style="color:#00FF00">good</span> |
 | <span style="color:#FFFF00">70% - 80%</span>| <span style="color:#FFFF00">not bad</span>|
 |<span style="color:#FFFF00">60% - 70%</span>|<span style="color:#FFFF00">try more</span>|
-|<span style="color:#FFFF00">50% - 60%</span>|<span style="color:#FFFF00">just pass</span>|
+|<span style="color:#FFFF00">50% - 60%</span>|<span ~style="color:#FFFF00">just pass</span>|
 |<span style="color:#FF0000">< 50%</span>|<span style="color:#FF0000">did't pass</span>|
  
