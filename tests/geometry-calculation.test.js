@@ -32,15 +32,22 @@ describe('calculateJunctionPoint', () => {
     });
 
     test('should return the junction point if lines intersect', () => {
-        const line1 = new Line({ slope: 1, n: 0 });
-        const line2 = new Line({ slope: -1, n: 4 });
+        const line1 = new Line({slope:1,n:2});
+        const line2 = new Line({slope:-1,n:3});
+        const expectedJunctionPoint = { x: 0.5, y: 2.5 }; 
+        line1.getPointByX = jest.fn().mockImplementation((x) => {
+            return { x, y: line1.slope * x + line1.n };
+        });
         const result = calculateJunctionPoint(line1, line2);
-        expect(result).toEqual({ x: 2, y: 2 });
+        expect(line1.getPointByX).toHaveBeenCalledWith(0.5);
+        expect(result).toEqual(expectedJunctionPoint);
     });
+    
     test('should throw an error for invalid input lines', () => {
         expect(() => calculateJunctionPoint(null, new Line({ slope: 1, n: 0 }))).toThrow('Invalid input lines');
         expect(() => calculateJunctionPoint(new Line({ slope: 1, n: 0 }), null)).toThrow('Invalid input lines');
         expect(() => calculateJunctionPoint({}, new Line({ slope: 1, n: 0 }))).toThrow('Invalid input lines');
+
     });
 
 });
@@ -56,8 +63,6 @@ describe('isPointOnLine', () => {
         const result = isPointOnLine(line, point);
         expect(result).toBe(true);
     });
-  
-    
     test('should return false if the point is not on the line', () => {
         const point1 = new Point({ x: 0, y: 0 });
         const point2 = new Point({ x: 4, y: 4 });
@@ -77,8 +82,25 @@ describe('isPointOnLine', () => {
         expect(() => isPointOnLine(null, point)).toThrow('Invalid input line or point');
         expect(() => isPointOnLine(line, null)).toThrow('Invalid input line or point');
         expect(() => isPointOnLine(line,{ x: 'a', y: 2 })).toThrow('Invalid input line or point');
-        expect(() => isPointOnLine(line,new Point({ x: 'a', y: 2 }))).toThrow('InvalidPointError: Coordinates must be numbers');
+        expect(() => isPointOnLine(line,new Point({ x: 'a', y: 2 }))).toThrow('InvalidPointError: values must be numbers');
+        expect(() => calculateJunctionPoint(new Line({ slope: 1, n: 0 }))).toThrow('Invalid input lines');
+        expect(() => calculateJunctionPoint(new Line({ slope: 1, n: 0 }))).toThrow('Invalid input lines');
+    });
+
+    test('should throw an error where slope is undefined', () => {
+        const point1 = new Point({ x: 0, y: 0 });
+        const point2 = new Point({ x: 4, y: 4 });
+        const point = new Point({ x: 2, y: 3 });
+        const line = new Line({ point1:point1, point2: point2 });
+        expect(() => calculateJunctionPoint(line,new Line({  n: 0 }))).toThrow('slope is undefined');
+        expect(() => calculateJunctionPoint(line,new Line({}))).toThrow('slope is undefined')
+    })
+    test('should throw an error where n is undefined', () => {
+        const point1 = new Point({ x: 0, y: 0 });
+        const point2 = new Point({ x: 4, y: 4 });
+        const line = new Line({ point1:point1, point2: point2 ,slope:0});
+        expect(() => calculateJunctionPoint(line,new Line({ slope: 0 }))).toThrow('n is undefined');
     });
      
-    
+ 
 });

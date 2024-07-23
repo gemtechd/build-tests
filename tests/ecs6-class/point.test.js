@@ -13,12 +13,12 @@ describe('Point class', () => {
         expect(point.y).toBe(4);
     });
 
-    test('should throw an error for invalid initial coordinates', () => {
-        expect(() => new Point({ x: 'a', y: 4 })).toThrow('InvalidPointError: Coordinates must be numbers');
-        expect(() => new Point({ x: 3, y: 'b' })).toThrow('InvalidPointError: Coordinates must be numbers');
-        expect(() => new Point({ x: 'a', y: 'b' })).toThrow('InvalidPointError: Coordinates must be numbers');
+    test('should throw an error for invalid initial values', () => {
+        expect(() => new Point({ x: 'a', y: 4 })).toThrow('InvalidPointError: values must be numbers');
+        expect(() => new Point({ x: 3, y: 'b' })).toThrow('InvalidPointError: values must be numbers');
+        expect(() => new Point({ x: 'a', y: 'b' })).toThrow('InvalidPointError: values must be numbers');
     });
-
+ describe('moveVertical',()=>{
     test('should move vertically', () => {
         const point = new Point({ x: 0, y: 0 });
         point.moveVertical(5);
@@ -27,17 +27,25 @@ describe('Point class', () => {
 
     test('should throw an error for invalid vertical move value', () => {
         const point = new Point({ x: 0, y: 0 });
-        expect(() => point.moveVertical('a')).toThrow('InvalidValueError: Value must be a number');
+        expect(() => point.moveVertical('a')).toThrow('InvalidValueError: Value must be a numbe');
+        expect(() => point.moveVertical({})).toThrow('InvalidValueError: Value must be a number');
+        expect(() => point.moveVertical()).toThrow('InvalidValueError: Value must be a number');
+        expect(() => point.moveVertical([])).toThrow('InvalidValueError: Value must be a number');
     });
-
+ })
+ describe('moveHorizontal',()=>{
     test('should move horizontally', () => {
         const point = new Point({ x: 0, y: 0 });
         point.moveHorizontal(5);
         expect(point.x).toBe(5);
     });
-
     test('should throw an error for invalid horizontal move value', () => {
         const point = new Point({ x: 0, y: 0 });
-        expect(() => point.moveHorizontal('a')).toThrow('InvalidValueError: Value must be a number');
+        expect(() => point.moveHorizontal('a')).toThrow('InvalidValueError: Value must be a numbe');
+        expect(() => point.moveHorizontal({})).toThrow('InvalidValueError: Value must be a number');
+        expect(() => point.moveHorizontal()).toThrow('InvalidValueError: Value must be a number');
+        expect(() => point.moveHorizontal([])).toThrow('InvalidValueError: Value must be a number');
     });
+ });
+   
 });

@@ -11,11 +11,18 @@ const calculateDistance = (point1, point2) => {
     return distance;
 }
 
-const calculateJunctionPoint = (line1, line2) => {
+const calculateJunctionPoint = (line1, line2) => { 
+   
     if (!(line1 instanceof Line) || !(line2 instanceof Line)) {
         throw new Error('Invalid input lines');
     }
+    if(line1.slope==undefined||line2.slope==undefined){
+        throw new Error('slope is undefined');
+    }
     if (line1.slope === line2.slope) {
+        if(line1.n===undefined||line2.n===undefined){
+            throw new Error('n is undefined');
+        }
         if (line1.n === line2.n) {
             return true;
         }
@@ -38,7 +45,6 @@ const isPointOnLine = (line, point) => {
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
         proxyLine.calculateNOfLineFunction()
-        console.log(line.n,'nnnn',proxyLine.n);
         if (line.n === proxyLine.n) {
             return true
         }
