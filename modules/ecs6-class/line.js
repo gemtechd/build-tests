@@ -1,7 +1,7 @@
 const Point = require("./point");
 
 class Line {
-    constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
+    constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {  
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
@@ -9,7 +9,10 @@ class Line {
     }
 
     calculateSlope = () => {
-        this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
+        if((this.point1.y - this.point2.y) !== 0)
+          this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
+        else
+          throw new Error('division by zero')
     }
 
     calculateNOfLineFunction = () => {
