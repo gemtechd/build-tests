@@ -7,7 +7,7 @@
     "test": "jest",
     "test:coverage":"npm run test -- --coverage"
   },
-  "dependencies": {
+  "devDependencies": {
     "jest": "^29.7.0"
   },
   "repository": {
