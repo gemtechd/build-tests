@@ -21,6 +21,8 @@ describe('POINT', () => {
       expect(() => new Point({ x: '3', y: 5 })).toThrow('x is not a number')
       expect(() => new Point({ x: [5, 7], y: 8 })).toThrow('x is not a number')
       expect(() => new Point({ x: 3, y: { x: 7, y: 5 } })).toThrow('y is not a number')
+      expect(() => new Point({ x: 3, y: {}})).toThrow('y is not a number')
+      expect(() => new Point({ x: {}, y: { x: 7, y: 5 } })).toThrow('x is not a number')
     })
   })
 
@@ -37,6 +39,7 @@ describe('POINT', () => {
       expect(() => point.moveVertical('4')).toThrow('value is not a number')
       expect(() => point.moveVertical([2, 5])).toThrow('value is not a number')
       expect(() => point.moveVertical({ key: 5, desc: 'fghh' })).toThrow('value is not a number')
+      expect(() => point.moveVertical()).toThrow('value is not a number')
     })
   })
 
@@ -53,6 +56,7 @@ describe('POINT', () => {
       expect(() => point.moveHorizontal('4')).toThrow('value is not a number')
       expect(() => point.moveHorizontal([2, 5])).toThrow('value is not a number')
       expect(() => point.moveHorizontal({ key: 5, desc: 'fghh' })).toThrow('value is not a number')
+      expect(() => point.moveHorizontal()).toThrow('value is not a number')
     })
   })
 
