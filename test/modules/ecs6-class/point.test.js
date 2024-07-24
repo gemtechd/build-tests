@@ -1,8 +1,32 @@
 const Point = require('../../../modules/ecs6-class/point')
 let mypoint = new Point()
 
-describe('MOVE_VERTICAL', () => {
+describe('POINT_CONSTRUCTOR', () => {
+    it('should check the point object', () => {
+        expect(mypoint.x).toBe(0)
+        expect(mypoint.y).toBe(0)
+    })
+    describe('CONSTRUCTOR_POINT_ERROR', () => {
+        it('should throw error if the point not valid', () => {
+            expect(() => new Point({ x: 'x', y: 'y' })).toThrow('x is not a number!')
+            expect(() => new Point({ x: 'x' })).toThrow('x is not a number!')
+            expect(() => new Point({ y: 'y' })).toThrow('y is not a number!')
+            expect(() => new Point({ x: true })).toThrow('x is not a number!')
+            expect(() => new Point({ y: false })).toThrow('y is not a number!')
+            expect(() => new Point({ x: ['a', 'b'] })).toThrow('x is not a number!')
+            expect(() => new Point({ y: ['c', 'd'] })).toThrow('y is not a number!')
+            expect(() => new Point({ x: ['a', 'b'], y: ['c', 'd'] })).toThrow('x is not a number!')
+            expect(() => new Point({ x: [true, true, false] })).toThrow('x is not a number!')
+            expect(() => new Point({ y: [false, true] })).toThrow('y is not a number!')
+            expect(() => new Point({ x: [true, false], y: [false, true] })).toThrow('x is not a number!')
+            expect(() => new Point({ x: () => true })).toThrow('x is not a number!')
+            expect(() => new Point({ y: () => false })).toThrow('y is not a number!')
+            expect(() => new Point({ x: () => { }, y: () => true })).toThrow('x is not a number!')
+        })
+    })
+})
 
+describe('MOVE_VERTICAL', () => {
     it('should add to this.y the value', () => {
         let point = new Point({})
         point.moveVertical(6)
@@ -16,7 +40,7 @@ describe('MOVE_VERTICAL', () => {
     })
 
     describe('ERROR', () => {
-        it('', () => {
+        it('should throw error if the function not get/get a valid argument', () => {
             expect(() => mypoint.moveVertical(a => (a))).toThrow('the value is not a number!')
             expect(() => mypoint.moveVertical(true)).toThrow('the value is not a number!')
             expect(() => mypoint.moveVertical('aaa')).toThrow('the value is not a number!')
@@ -41,7 +65,7 @@ describe('MOVE_HORIZONTAL', () => {
     })
 
     describe('ERROR', () => {
-        it('', () => {
+        it('should throw error if the function not get/get a valid argument', () => {
             expect(() => mypoint.moveHorizontal(v => (v))).toThrow('the value is not a number!')
             expect(() => mypoint.moveHorizontal(true)).toThrow('the value is not a number!')
             expect(() => mypoint.moveHorizontal('aaa')).toThrow('the value is not a number!')
@@ -51,23 +75,5 @@ describe('MOVE_HORIZONTAL', () => {
     })
 })
 
-describe('CONSTRUCTOR_ERROR', () => {
-    it('', () => {
-        expect(() => new Point({ x: 'x', y: 'y' })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: 'x' })).toThrow('argument is not a number!')
-        expect(() => new Point({ y: 'y' })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: true })).toThrow('argument is not a number!')
-        expect(() => new Point({ y: false })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: ['a', 'b'] })).toThrow('argument is not a number!')
-        expect(() => new Point({ y: ['c', 'd'] })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: ['a', 'b'], y: ['c', 'd'] })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: [true, true, false] })).toThrow('argument is not a number!')
-        expect(() => new Point({ y: [false, true] })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: [true, false], y: [false, true] })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: () => true })).toThrow('argument is not a number!')
-        expect(() => new Point({ y: () => false })).toThrow('argument is not a number!')
-        expect(() => new Point({ x: () => { }, y: () => true })).toThrow('argument is not a number!')
-    })
-})
 
 

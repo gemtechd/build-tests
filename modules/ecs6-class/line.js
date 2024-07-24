@@ -9,9 +9,19 @@ class Line {
         if (typeof(n) !== "undefined" && typeof(n) !== "number") {
             throw new Error("n is not valid!")
         }
-        if ((!(point1 instanceof Point)) || (!(point2 instanceof Point))) {
-            throw new Error("the object not instance of 'Point'!")
+
+        if ((!(point1 instanceof Point))&& (!(point2 instanceof Point))) {
+            throw new Error("point1 and point2 not instance of 'Point'!")
         }
+
+        if (!(point1 instanceof Point)) {
+            throw new Error("point1 not instance of 'Point'!")
+        }
+
+        if ( !(point2 instanceof Point)) {
+            throw new Error("point2 not instance of 'Point'!")
+        }
+
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
