@@ -2,10 +2,17 @@ const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {  
-        this.point1 = point1;
-        this.point2 = point2;
-        this.slope = slope;
-        this.n = n;
+       if((point1 instanceof Point) )      
+          if((point2 instanceof Point)){
+            this.point1 = point1;
+            this.point2 = point2;
+            this.slope = slope;
+            this.n = n;
+    }
+    else{
+        throw new Error('the type of point2 is not Point')}
+    else
+        throw new Error('the type of point1 is not Point')
     }
 
     calculateSlope = () => {
@@ -34,8 +41,12 @@ class Line {
     }
 
     getPointByY(y) {
-        let x = (y - this.n) / this.slope;
-        return new Point({ x, y })
+        if(this.slope !== 0){
+            let x = (y - this.n) / this.slope;
+            return new Point({ x, y })
+       }
+       else
+         throw new Error('division by zero')
     }
 }
 

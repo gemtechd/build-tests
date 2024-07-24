@@ -8,6 +8,12 @@ describe('CONSTRUCTOR',() => {
         expect(line.n).toBe(4)
         expect(line.point1.x).toBe(0)
     })
+    it('should build an object with default values',() => {
+        expect(()=> new Line({point1:[],point2:new Point({x:2,y:2})})).toThrowError('the type of point1 is not Point')
+    })
+    it('should build an object with default values',() => {
+        expect(()=> new Line({point1:new Point({x:2,y:2}),point2:[]})).toThrowError('the type of point2 is not Point')
+    })
 })
 
 
@@ -61,5 +67,9 @@ describe('GET_POINT_BY_Y', () =>{
         const line = new Line({point1:new Point({x:6,y:4}),point2:new Point({x:2,y:2}),slope:2,n:-8})
         const result = line.getPointByY(2)
         expect(result).toEqual({x:5,y:2})
+    })
+    it('An error should be thrown when the slope equals 0', () => {
+        const line = new Line({point1:new Point({x:2,y:6}),point2:new Point({x:1,y:6}),n:6,slope:0})       
+        expect(()=>line.getPointByY(11)).toThrowError('division by zero')
     })
 })
