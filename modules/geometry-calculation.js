@@ -5,7 +5,7 @@ const calculateDistance = (point1, point2) => {
     if (!point1 || !point2) {
         throw new Error('missing data')
     }
-    if (!(point1 instanceof Point) ||  !(point2 instanceof Point )) {
+    if (!(point1 instanceof Point) || !(point2 instanceof Point)) {
         throw new Error('argument must by type point')
     }
     let distanceX = (point2.x - point1.x) ** 2;
@@ -34,7 +34,7 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
-    if (!line||!line.slope  ||!line.n|| !point ) {
+    if (!line || !line.slope || !line.n || !point) {
         throw new Error("missing data")
     }
     const proxyLine = new Line({ point1: line.point1, point2: point })

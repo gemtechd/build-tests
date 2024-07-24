@@ -66,7 +66,7 @@ describe("LINE", function () {
             let li1 = new Line({ n: 7, slope: 2 })
             expect(li1.getPointByY(3)).toEqual({ x: -2, y: 3 })
         })
-        
+
     })
     describe("EERORS", function () {
         const poix = new Point({ x: 3, y: 4 });
@@ -113,8 +113,8 @@ describe("LINE", function () {
             it("should return error if missing attribute", function () {
                 let li1 = new Line({ n: 7 })
                 let li2 = new Line({ slope: 7 })
-                expect(function(){li1.getPointByX(3)}).toThrow(new Error("missing argument"))
-                expect(function(){li2.getPointByX(3)}).toThrow(new Error("missing argument"))
+                expect(function () { li1.getPointByX(3) }).toThrow(new Error("missing argument"))
+                expect(function () { li2.getPointByX(3) }).toThrow(new Error("missing argument"))
 
             })
         })
@@ -129,8 +129,8 @@ describe("LINE", function () {
             it("should return error if missing attribute", function () {
                 let li1 = new Line({ n: 7 })
                 let li2 = new Line({ slope: 7 })
-                expect(function(){li1.getPointByY(3)}).toThrow(new Error("missing argument"))
-                expect(function(){li2.getPointByY(3)}).toThrow(new Error("missing argument"))
+                expect(function () { li1.getPointByY(3) }).toThrow(new Error("missing argument"))
+                expect(function () { li2.getPointByY(3) }).toThrow(new Error("missing argument"))
 
             })
         })

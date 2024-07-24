@@ -27,8 +27,8 @@ describe("CALCULATE_DISTANCE", function () {
             expect(function () { calculateDistance(() => { }, 9) }).toThrow(new Error("argument must by type point"))
             expect(function () { calculateDistance(1.8, 9) }).toThrow(new Error("argument must by type point"))
             expect(function () { calculateDistance(2, "uioyi") }).toThrow(new Error("argument must by type point"))
-            expect(function () { calculateDistance(2,[1,2,3]) }).toThrow(new Error("argument must by type point"))
-            expect(function () { calculateDistance([1,2,3], 1) }).toThrow(new Error("argument must by type point"))
+            expect(function () { calculateDistance(2, [1, 2, 3]) }).toThrow(new Error("argument must by type point"))
+            expect(function () { calculateDistance([1, 2, 3], 1) }).toThrow(new Error("argument must by type point"))
 
         })
 
@@ -106,10 +106,10 @@ describe("IS_POINT_IN_LINE", function () {
     describe("EERORS", function () {
         it("should returen error if not get 2 points", function () {
             const x = new Point({ x: 4, y: 3 })
-            expect(function(){isPointOnLine(x)}).toThrow("missing data")
+            expect(function () { isPointOnLine(x) }).toThrow("missing data")
         })
         it("should returen error in not get attribute", function () {
-            expect(function(){isPointOnLine()}).toThrow("missing data")
+            expect(function () { isPointOnLine() }).toThrow("missing data")
         })
     })
 });
