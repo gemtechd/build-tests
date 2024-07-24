@@ -8,6 +8,7 @@ class Point {
         }
         if (typeof (y) != "number") {
             throw Error('y isnt number')
+
         }
         this.x = x;
         this.y = y;
@@ -32,4 +33,4 @@ class Point {
         this.x += value;
     }
 }
-module.exports = { Point, moveVertical: Point.prototype.moveVertical, moveHorizontal: Point.prototype.moveHorizontal }
+module.exports = Point

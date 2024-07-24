@@ -1,6 +1,5 @@
-const {Point,moveVertical}=require('../../../modules/ecs6-class/point')
-const { calculateSlope } = require('../../../modules/ecs6-class/line')
-const mockConstructor = jest.fn(constructor);
+const Point=require('../../../modules/ecs6-class/point')
+// const { calculateSlope } = require('../../../modules/ecs6-class/line')
 
 describe('constructor', () => {
     it('should initialize x or y to default values when no parameters are provided', () => {
@@ -27,15 +26,15 @@ describe('constructor', () => {
 });
 describe('moveVertical', () => { 
     it('should throw error when value is undefined', () => {
-        const point2= mockConstructor(new Point());
+        const point2= (new Point());
         expect(()=>point2.moveVertical()).toThrow('value is undefined');
     });
     it('should throw error when value isnt a number ',()=>{
-        const point=mockConstructor(new Point())
+        const point=(new Point())
         expect(()=>point.moveVertical('dddd')).toThrow('value isnt number');
     })
     it('should be ok when value is number ',()=>{
-        const point =mockConstructor(new Point({x:5,y:4}))
+        const point =(new Point({x:5,y:4}))
         point.moveVertical(5);
         expect(point.y).toBe(9);
     })
@@ -44,15 +43,15 @@ describe('moveVertical', () => {
 describe('moveHorizontal', () => { 
     
     it('should throw error when value is undefined', () => {
-        const point2= mockConstructor(new Point());
+        const point2= (new Point());
         expect(()=>point2.moveHorizontal()).toThrow('value is undefined');
     });
     it('should throw error when value isnt a number ',()=>{
-        const point=mockConstructor(new Point())
+        const point=(new Point())
         expect(()=>point.moveHorizontal('dddd')).toThrow('value isnt number');
     })
     it('should be ok when value is number ',()=>{
-        const point =mockConstructor(new Point({x:5,y:4}))
+        const point =(new Point({x:5,y:4}))
         point.moveHorizontal(5);
         expect(point.x).toBe(10);
     })

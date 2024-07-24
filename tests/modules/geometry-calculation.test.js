@@ -1,5 +1,5 @@
-const { Line } = require('../../modules/ecs6-class/line');
-const { Point } = require('../../modules/ecs6-class/point');
+const Line  = require('../../modules/ecs6-class/line');
+const  Point = require('../../modules/ecs6-class/point');
 const { calculateDistance, calculateJunctionPoint, isPointOnLine } = require('../../modules/geometry-calculation');
 
 describe('calculateDistance', () => {
@@ -32,6 +32,11 @@ describe('calculateJunctionPoint', () => {
         const Line9 = new Line({ point1: new Point({ x: 2, y: 3 }), point2: new Point({ x: 4, y: 5 }), n: 5, slope: 10 })
         expect(calculateJunctionPoint(Line8, Line9)).toStrictEqual(new Point({ x: 2, y: 25 }))
     });
+    it('should toBe calculateJunctionPoint', () => {
+        const line1 = new Line({ point1: (new Point({ x: 3, y: 8 })), point2: (new Point({ x: 1, y: 4 })), n: undefined, slope: undefined });
+        const line2 = new Line({ point1: (new Point({ x: 7, y: 8 })), point2: (new Point({ x: 6, y: 2 })), n: undefined, slope: undefined });
+        expect(calculateJunctionPoint(line1, line2)).toEqual({ x: 9, y: 20 })
+    });
 })
 
 
@@ -54,5 +59,10 @@ describe('isPointOnLine', () => {
         expect(isPointOnLine(Line8, point)).toBe(false)
         expect(isPointOnLine(Line10, point2)).toBe(false)
         expect(isPointOnLine(Line9, point2)).toBe(true)
+    });
+    it('should toBe calculateJunctionPoint', () => {
+        const line1 = new Line({ point1: (new Point({ x: 6, y: 8 })), point2: (new Point({ x: 8, y: 16 })), n: undefined, slope: undefined });
+        const point = new Point({ x: 3, y: 4 });
+        expect(isPointOnLine(line1, point)).toBe(false)
     });
 });
