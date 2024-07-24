@@ -34,7 +34,7 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
-    if (line == undefined || point == undefined) {
+    if (!line||!line.slope  ||!line.n|| !point ) {
         throw new Error("missing data")
     }
     const proxyLine = new Line({ point1: line.point1, point2: point })
