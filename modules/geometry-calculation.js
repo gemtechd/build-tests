@@ -15,9 +15,19 @@ const calculateDistance = (point1, point2) => {
 }
 
 const calculateJunctionPoint = (line1, line2) => {
-    if (!(line1 instanceof Line) || !(line2 instanceof Line)) {
-        throw Error('The value is of an invalid type')
+    if (!(line1 instanceof Line) && !(line2 instanceof Line)) {
+        throw Error('The values are of an invalid type')
     }
+    if (!(line1 instanceof Line)) {
+        throw Error('The first value is of an invalid type')
+    }
+    if (!(line2 instanceof Line)) {
+        throw Error('The second value is of an invalid type')
+    }
+    line1.calculateSlope()
+    line2.calculateSlope()
+    line1.calculateNOfLineFunction()
+    line2.calculateNOfLineFunction()
     if (line1.slope === line2.slope) {
         if (line1.n === line2.n) {
             return true

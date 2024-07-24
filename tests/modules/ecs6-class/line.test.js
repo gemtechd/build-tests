@@ -10,64 +10,104 @@ const getPointByXMock = jest
 
 
 describe('Check calculateSlope function', () => {
-    test(' Should return the slope of the line', () => {
+    it(' Should return the slope of the line', () => {
         let point1 = new Point({ x: 5, y: 7 });
         let point2 = new Point({ x: 3, y: 8 });
         let line1 = new Line({ point1, point2 });
         line1.calculateSlope();
         expect(line1.slope).toBe(-0.5)
     })
-    test(' Should return 0 if the points are in the same position on the x-axis', () => {
-        let point1 = new Point({ x: 5, y: 7 });
-        let point2 = new Point({ x: 5, y: 8 });
-        let line1 = new Line({ point1, point2 });
-        line1.calculateSlope();
-        expect(line1.slope).toBe(0)
-    })
-    test(' Should return 0 if the points are in the same position on the x-axis', () => {
+    it(' Should return 0 if the points are in the same position on the x-axis', () => {
         let point1 = new Point({ x: 5, y: 7 });
         let point2 = new Point({ x: 3, y: 7 });
         let line1 = new Line({ point1, point2 });
         line1.calculateSlope();
         expect(line1.slope).toBe(0)
     })
+    describe('ERRORS', () => {
+        it('should throw error when the type is not valid', () => {
+            let point1 = new Point({ x: 3, y: 7 });
+            let point2 = new Point({ x: 3, y: 8 });
+            let line1 = new Line({ point1, point2 });
+            expect(() => line1.calculateSlope()).toThrow("it isn't a real geometry line")
+
+
+        })
+    })
 
 })
 
 describe('Check calculateNOfLineFunction function', () => {
-    test('Should return n of the line', () => {
+    it('Should return n of the line', () => {
         let point1 = new Point({ x: 5, y: 7 });
         let point2 = new Point({ x: 3, y: 8 });
         let line1 = new Line({ point1, point2, slope: -0.5 });
         line1.calculateNOfLineFunction();
         expect(line1.n).toBe(9.5)
     })
+    it('Should return n of the line and computer the slpoe if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2 });
+        line1.calculateNOfLineFunction();
+        expect(line1.slope).toBe(-0.5)
+        expect(line1.n).toBe(9.5)
+    })
 })
 
 describe('Check getPointOnXAsis function', () => {
-        test('It should be returned if in the call to the function the function getPointByY was called', () => {
-            const line1 = new Line();
-            line1.getPointOnXAsis();
-            expect(getPointByYMock).toHaveBeenCalled();
-        });
-    })
+    it('It should be returned if in the call to the function the function getPointByY was called', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        const line1 = new Line({point1,point2,n:7,slope:6});
+        line1.getPointOnXAsis();
+        expect(getPointByYMock).toHaveBeenCalled();
+    });
+})
 
-    describe('Check getPointOnXYAsis function', () => {
-        test('It should be returned if in the call to the function the function getPointByX was called', () => {
-            const line1 = new Line();
-            line1.getPointOnYAsis();
-            expect(getPointByXMock).toHaveBeenCalled();
-        });
-    })
+describe('Check getPointOnYAsis function', () => {
+    it('It should be returned if in the call to the function the function getPointByX was called', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        const line1 = new Line({point1,point2,n:7,slope:6});
+        line1.getPointOnYAsis();
+        expect(getPointByXMock).toHaveBeenCalled();
+    });
+})
 
 
 describe('Check getPointByX function', () => {
-    test(' Should return point', () => {
-        let line1 = new Line({ slope: 2, n: 7 });
-        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 19 })
+    it(' Should return point', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2, slope: 2, n: 7 });
+        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 6.5 })
+        
+    })
+    it('Should return point and computer the slpoe if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2, n: 7 });
+        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 6.5 })
+        expect(line1.slope).toBe(-0.5)
+    })
+    it('Should return point and computer the n if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2, slope:-0.5 });
+        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 6.5 })
+        expect(line1.n).toBe(9.5)
+    })
+    it('Should return a point and calculate n and the slope if they are not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2});
+        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 6.5 })
+        expect(line1.slope).toBe(-0.5)
+        expect(line1.n).toBe(9.5)
     })
     describe('ERRORS', () => {
-        test('should throw error when the type is not valid', () => {
+        it('should throw error when the type is not valid', () => {
             let point1 = new Point({ x: 5, y: 7 });
             let point2 = new Point({ x: 3, y: 8 });
             let line1 = new Line({ point1, point2 });
@@ -81,12 +121,36 @@ describe('Check getPointByX function', () => {
 })
 
 describe('Check getPointByY function', () => {
-    test('Should return point ', () => {
-        let line1 = new Line({ slope: 2, n: 7 });
-        expect(line1.getPointByY(3)).toEqual({ x: -2, y: 3 })
+    it('Should return point ', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1,point2,slope: 2, n: 7 });
+        expect(line1.getPointByY(6)).toEqual({ x: 7, y: 6 })
+    })
+    it('Should return point and computer the slpoe if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2, n: 9.5 });
+        expect(line1.getPointByY(6)).toEqual({ x: 7, y: 6 })
+        expect(line1.slope).toBe(-0.5)
+    })
+    it('Should return point and computer the n if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2, slope:-0.5 });
+        expect(line1.getPointByY(6)).toEqual({ x: 7, y: 6 })
+        expect(line1.n).toBe(9.5)
+    })
+    it('Should return a point and calculate n and the slope if they are not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let line1 = new Line({ point1, point2});
+        expect(line1.getPointByY(6)).toEqual({ x: 7, y: 6 })
+        expect(line1.slope).toBe(-0.5)
+        expect(line1.n).toBe(9.5)
     })
     describe('ERRORS', () => {
-        test('should throw error when the type is not valid', () => {
+        it('should throw error when the type is not valid', () => {
             let point1 = new Point({ x: 5, y: 7 });
             let point2 = new Point({ x: 3, y: 8 });
             let line1 = new Line({ point1, point2 });
@@ -96,16 +160,22 @@ describe('Check getPointByY function', () => {
             expect(() => line1.getPointByY([1, 2])).toThrow('The value is of an invalid type')
             expect(() => line1.getPointByY()).toThrow("The value is of an invalid type")
         })
+        it('should throw error when The slope is equal to 0',()=>{
+            let point1 = new Point({ x: 5, y: 8 });
+            let point2 = new Point({ x: 3, y: 8 });
+            let line1= new Line({ point1, point2 ,slope:0});
+            expect(() => line1.getPointByY(21)).toThrow("The slope cannot be 0")
+        })
     })
 })
 
 describe('ERRORS', () => {
-    test('should throw error when the values of the line is not valid', () => {
+    it('should throw error when the values of the line is not valid', () => {
         let point1 = new Point({ x: 2, y: 3 })
         let point2 = new Point({ x: 4, y: 5 })
         let line1;
-        expect(() => line1 = new Line({ point1: 9, point2, n: 4, slope: 6 })).toThrow(' should have Point type')
-        expect(() => line1 = new Line({ point1, point2: [1, 2], n: 4, slope: 6 })).toThrow(' should have Point type')
+        expect(() => line1 = new Line({ point1: 9, point2, n: 4, slope: 6 })).toThrow('The point1 should be a Point type')
+        expect(() => line1 = new Line({ point1, point2: [1, 2], n: 4, slope: 6 })).toThrow('The point2 should be a Point type')
         expect(() => line1 = new Line({ point1, point2, n: 'c', slope: 6 })).toThrow('The n should have a number')
         expect(() => line1 = new Line({ point1, point2, n: 4, slope: false })).toThrow('The slope should have a number')
 

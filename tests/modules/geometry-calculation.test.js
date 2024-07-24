@@ -18,16 +18,14 @@ const calculateNOfLineFunctionMock = jest
 
 
 
-
-
 describe('Check calculateDistance function', () => {
-    test(' Should return the square root of the sum of the distances between x and y of the points', () => {
+    it(' Should return the square root of the sum of the distances between x and y of the points', () => {
         let point1 = new Point({ x: 5, y: 7 });
         let point2 = new Point({ x: 3, y: 8 });
         expect(geometry.calculateDistance(point1, point2)).toBe(2.23606797749979);
     })
     describe('ERRORS', () => {
-        test('should throw error when the type is not Point', () => {
+        it('should throw error when the type is not Point', () => {
             expect(() => geometry.calculateDistance(1, 2)).toThrow('The value is of an invalid type')
             expect(() => geometry.calculateDistance('o', 'p')).toThrow('The value is of an invalid type')
             expect(() => geometry.calculateDistance(false, true)).toThrow('The value is of an invalid type')
@@ -72,12 +70,35 @@ describe('Check calculateJunctionPoint function', () => {
     })
 
     describe('ERRORS', () => {
-        test('should throw error when the type is not line', () => {
-            expect(() => geometry.calculateJunctionPoint(1, 2)).toThrow('The value is of an invalid type')
-            expect(() => geometry.calculateJunctionPoint('o', 'p')).toThrow('The value is of an invalid type')
-            expect(() => geometry.calculateJunctionPoint(false, true)).toThrow('The value is of an invalid type')
-            expect(() => geometry.calculateJunctionPoint([1, 2], [2, 3],)).toThrow('The value is of an invalid type')
-            expect(() => geometry.calculateJunctionPoint()).toThrow('The value is of an invalid type')
+        test('should throw error when the values are not line', () => {
+            let point1 = new Point({ x: 5, y: 7 });
+            let point2 = new Point({ x: 3, y: 8 });
+            let line1 = new Line({ point1, point2, n: 9, slope: 7 });
+            expect(() => geometry.calculateJunctionPoint(1, 2)).toThrow('The values are of an invalid type')
+            expect(() => geometry.calculateJunctionPoint('o', 'p')).toThrow('The values are of an invalid type')
+            expect(() => geometry.calculateJunctionPoint(false, true)).toThrow('The values are of an invalid type')
+            expect(() => geometry.calculateJunctionPoint([1, 2], [5, 8])).toThrow('The values are of an invalid type')
+            expect(() => geometry.calculateJunctionPoint()).toThrow('The values are of an invalid type')
+        })
+
+        test('should throw error when the first value is not line', () => {
+            let point1 = new Point({ x: 5, y: 7 });
+            let point2 = new Point({ x: 3, y: 8 });
+            let line1 = new Line({ point1, point2, n: 9, slope: 7 });
+            expect(() => geometry.calculateJunctionPoint(1, line1)).toThrow('The first value is of an invalid type')
+            expect(() => geometry.calculateJunctionPoint('o', line1)).toThrow('The first value is of an invalid type')
+            expect(() => geometry.calculateJunctionPoint(false, line1)).toThrow('The first value is of an invalid type')
+            expect(() => geometry.calculateJunctionPoint([1, 2], line1)).toThrow('The first value is of an invalid type')
+        })
+
+        test('should throw error when the second value is not line', () => {
+            let point1 = new Point({ x: 5, y: 7 });
+            let point2 = new Point({ x: 3, y: 8 });
+            let line1 = new Line({ point1, point2, n: 9, slope: 7 });
+            expect(() => geometry.calculateJunctionPoint(line1, 1)).toThrow('The second value is of an invalid type')
+            expect(() => geometry.calculateJunctionPoint(line1, 'o')).toThrow('The second value is of an invalid type')
+            expect(() => geometry.calculateJunctionPoint(line1, false)).toThrow('The second value is of an invalid type')
+            expect(() => geometry.calculateJunctionPoint(line1, [1, 2])).toThrow('The second value is of an invalid type')
 
         })
     })
