@@ -73,7 +73,18 @@ describe('isPointOnLine', () => {
         const result = isPointOnLine(line, point);
         expect(result).toBe(false);
     });
-   
+    test('should return false if the point is not on the line', () => {
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        const point1 = new Point({ x: 0, y: 0 });
+        const point2 = new Point({ x: 4, y: 4 });
+        const line = new Line({ point1: point1, point2: point2 ,n:6});
+        const point = new Point({ x: 2, y: 3 });
+        line.calculateSlope();
+        line.calculateNOfLineFunction();
+        const result = isPointOnLine(line, point);
+        console.log(line.n,'aaaaa');
+        expect(result).toBe(false);
+    });
     test('should throw an error for invalid input line or point', () => {
         const point1 = new Point({ x: 0, y: 0 });
         const point2 = new Point({ x: 4, y: 4 });

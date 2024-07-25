@@ -55,6 +55,23 @@ describe('Line class', () => {
             expect(pointOnXAxis.x).toBe(1);
             expect(pointOnXAxis.y).toBe(0);
         });
+       
+    
+        test('should handle horizontal lines correctly by throwing an error', () => {
+            // Create a horizontal line (slope = 0)
+            const point1 = new Point({ x: 1, y: 0 });
+            const point2 = new Point({ x: 3, y: 0 });
+    
+            const line = new Line({
+                point1: point1,
+                point2: point2,
+                slope: 0,  // Correct the slope for horizontal line
+                n: 0
+            });
+    
+            // Expect the function to throw an error since horizontal lines don't have an x-intercept
+            expect(() => line.getPointOnXAsis()).toThrow('InvalidSlopeError: Slope cannot be zero for calculating X by Y');
+        });
         test('should throw an error for undefined slope (vertical line)', () => {
             const point1 = new Point({ x: 4, y: 0 });
             const point2 = new Point({ x: 4, y: 4 });
@@ -72,6 +89,15 @@ describe('Line class', () => {
             expect(pointOnYAxis.y).toBe(-1);
         });
 
+        test('should return the Y-intercept for horizontal lines', () => {
+            const point1 = new Point({ x: 1, y: 5 });
+            const point2 = new Point({ x: 3, y: 5 });
+            const line = new Line({ point1: point1, point2: point2, slope: 0, n: 5 });
+            const expectedPoint = new Point({ x: 0, y: 5 });
+            const result = line.getPointOnYAsis();
+    
+            expect(result).toEqual(expectedPoint);
+        });
         test('should throw an error for undefined slope (vertical line)', () => {
             const point1 = new Point({ x: 4, y: 0 });
             const point2 = new Point({ x: 4, y: 4 });

@@ -26,6 +26,7 @@ class Line {
     }
 
     getPointOnXAsis() {
+   
         if (this.slope === undefined || this.n === undefined) {
             this.calculateNOfLineFunction();
         }

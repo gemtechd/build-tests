@@ -42,9 +42,10 @@ const isPointOnLine = (line, point) => {
         throw new Error('Invalid input line or point');
     }
     const proxyLine = new Line({ point1: line.point1, point2: point })
-    proxyLine.calculateSlope()
+    proxyLine.calculateSlope();
     if (line.slope === proxyLine.slope) {
         proxyLine.calculateNOfLineFunction()
+     
         if (line.n === proxyLine.n) {
             return true
         }
