@@ -7,6 +7,7 @@ let line1 = new Line({ point1, point2 })
 const myline = new Line({})
 
 describe('LINE_CONSTRUCTOR', () => {
+   
     it('should check the line object', () => {
         expect(line1.point1.x).toBe(3)
         expect(line1.point1.y).toBe(4)
