@@ -4,6 +4,9 @@ class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
         console.log(point1, point2, "p1p2p2p1p");
 
+        // if (typeof(point1)!=Point||typeof(point2)!=Point||typeof(n)!="number"||typeof(slope)!="number") {
+        //     throw new Error("the constractor of line must get 2 points of type number")
+        // }
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;

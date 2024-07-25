@@ -129,10 +129,12 @@ describe("LINE_FUNCTION", function () {
         let line = new Line({ point1: new Point({ x: 3, y: 7 }), point2: new Point({ x: 9, y: 7 }), n: 9 })
         let line2 = new Line({ point1: new Point({ x: 3, y: 7 }), point2: new Point({ x: 9, y: 7 }), n: 9, slope: "jskjk" })
         let line3 = new Line({ point1: new Point({ x: 3, y: 7 }), point2: new Point({ x: 9, y: 7 }), n: 9, slope: 6 })
-        let line4 = new Line({ point1: "huhj", point2: "jij", n: "9", slope: "ijdi" })
-        console.log(typeof (line4.point1));
-
-
+        let line4=new Line({ point1: "huhj", point2: "jij", n: "9" ,slope:"ijdi"})
+        console.log(typeof(line4.point1));
+        // it("the constractor of line must get 2 points of type number",function(){
+        //     expect(()=>{new Line({ point1: "huhj", point2: "jij", n: "9" ,slope:"ijdi"})}).toThrow("the constractor of line must get 2 points of type number")
+        // })
+        
 
         console.log("loolooooooluuuuuuuuuuuu", line);
         it("the slope  of line must be defined", function () {
