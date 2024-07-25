@@ -94,22 +94,14 @@ describe('IS_POINT_ON_LINE', () => {
     })
 
     it('mock function on "isPointOnLine" function',()=>{
-        jest.mock('../../modules/ecs6-class/line', () => {
-            return jest.fn().mockImplementation(({ point1, point2, slope, n }) => ({
-                point1,
-                point2,
-                slope,
-                n,
-                calculateSlope: jest.fn().mockImplementation(function () {
-                    this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x);
-                }),
-                calculateNOfLineFunction: jest.fn().mockImplementation(function () {
-                    this.n = this.point1.y - this.slope * this.point1.x;
-                }),
-              
-            }));
-            
+        jest.spyOn(line6, 'calculateSlope').mockImplementation((x) => {
+            return { x, y: 0 };
         });
+        jest.spyOn(line6, 'calculateNOfLineFunction').mockImplementation((x) => {
+            return { x, y: 0 };
+        });
+        const points = isPointOnLine(line6,point6);
+        expect(points).toEqual(false);
     })
 
     describe('ERROR', () => {

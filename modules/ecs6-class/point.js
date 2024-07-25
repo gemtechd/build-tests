@@ -8,7 +8,6 @@ class Point {
         }
         this.x = x;
         this.y = y;
-
     }
     moveVertical(value) {
         if (value === undefined) {
