@@ -14,6 +14,8 @@ const point5 = new Point({ x: 2, y: 2 });
 const point6 = new Point({ x: 1, y: 1 });
 const line4 = new Line({ point1: point5, point2: point6, slope: 1, n: 0 });
 const line5 = new Line({ point1: point5, point2: point4, slope: 1, n: 3 });
+const line6 = new Line({ point1: point5, point2: point6, n: 0 });
+const line7 = new Line({ point1: point5, point2: point4, slope: 1 });
 
 describe('CALCULATE_DISTANCE', () => {
     test('should calculate distance', () => {
@@ -63,7 +65,15 @@ describe('IS_POINT_ON_LINE', () => {
     })
 
     test('should return true if the slope and n not equals', () => {
-        expect(isPointOnLine(line1, point1)).toEqual(false)
+        expect(isPointOnLine(line1, point4)).toEqual(false)
+    })
+
+    test('should to send to function: calculateSlope if slope is undefined', () => {
+        expect(isPointOnLine(line6, point1)).toEqual(false)
+    })
+
+    test('should to send to function: calculateNOfLineFunction if n is undefined', () => {
+        expect(isPointOnLine(line7, point1)).toEqual(false)
     })
 
     test('should throw string error when argumonts are no number string or undefined when argument is undefined', () => {

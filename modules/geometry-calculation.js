@@ -39,6 +39,8 @@ const isPointOnLine = (line, point) => {
         throw new Error('the argument should be line')
     if(!(point instanceof(Point)))
         throw new Error('the argument should be point')
+    if(line.slope === undefined)
+        line.calculateSlope()
     const proxyLine = new Line({ point1: line.point1, point2: point })
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {

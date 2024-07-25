@@ -15,7 +15,7 @@ class Point {
     moveHorizontal(value) {
         if (value === undefined)
             throw new Error('value is undefined')
-        if (typeof (value) != 'number')
+        if (typeof (value) !== 'number')
             throw new Error('argument is not a number')
         this.x += value;
     }
