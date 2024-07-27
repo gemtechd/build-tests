@@ -5,7 +5,7 @@ The purpose of this project is to practice unit tests in javascript. You have to
 
 
 ### Instructions
-- Fork this repository.
+- Fork this repository (from the `main` branch).
 - Clone your forked repository.
 - Run npm install.
 - Write your tests.
