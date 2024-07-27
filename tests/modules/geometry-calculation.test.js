@@ -4,22 +4,24 @@ const { calculateDistance, calculateJunctionPoint, isPointOnLine } = require('..
 const Point = jest.requireActual('../../modules/ecs6-class/point');
 const Line = jest.requireActual('../../modules/ecs6-class/line')
 
-/////האם זה בכיוון???????
-jest.mock('../../modules/ecs6-class/line', () => {
-    return jest.fn().mockImplementation(({ point1, point2, n, slope }) => {
-        return {
-            getPointByX: jest.fn().mockImplementation((x) => {
-                return (x, (1 * x + 5))
-            }),
-            calculateSlope: jest.fn().mockImplementation(() => {
-                return (slope, (point1.y - point2.y) / (point1.x - point2.x))
-            }),
-            calculateNOfLineFunction: jest.fn().mockImplementation(() => {
-                return (n, point1.y - slope * point1.x)
-            })
-        }
-    });
-});
+// jest.mock('../../modules/ecs6-class/line', () => {
+//     return jest.fn().mockImplementation(({ point1, point2, n, slope }) => {
+//         return {
+//             getPointByX: jest.fn().mockImplementation((x) => {
+//                 console.log('getPointByX-mock');
+//                 return (x, (1 * x + 5))
+//             }),
+//             calculateSlope: jest.fn().mockImplementation(() => {
+//                 console.log('calculateSlope-mock');
+//                 return (slope, (point1.y - point2.y) / (point1.x - point2.x))
+//             }),
+//             calculateNOfLineFunction: jest.fn().mockImplementation(() => {
+//                 console.log('calculateNOfLineFunction-mock');
+//                 return (n, point1.y - slope * point1.x)
+//             })
+//         }
+//     });
+// });
 
 
 describe('CALCULATE_DISTANCE', () => {
