@@ -1,6 +1,29 @@
 const Point=require ('../../../modules/ecs6-class/point')
 let point=new Point({})
 
+describe('CONSTRUCTOR',()=>{
+   it('should return x after is built the constructor',()=>{
+       expect(point.x).toBe(0)
+   })
+   it('should return y after is built the constructor',()=>{
+       expect(point.y).toBe(0)
+   })
+   
+
+
+})
+
+describe('ERRORS',()=>{
+   it('Error checker for constructor',()=>{
+   expect(()=>new Point({x:'a'})).toThrow('x should be of type number')
+   expect(()=>new Point({x:['acc','add']})).toThrow('x should be of type number')
+   expect(()=>new Point({y:true})).toThrow('y should be of type number')
+   expect(()=>new Point({y:(v)=>v})).toThrow('y should be of type number')
+   expect(()=>new Point({x:()=>false})).toThrow('x should be of type number')
+
+})
+})
+
 describe('MOVE_VERTICAL',()=>{
    it('should move y',()=>{
     const point=new Point({x:1,y:2})
@@ -36,15 +59,6 @@ describe('ERRORS',()=>{
 
    })
 })
-describe('ERRORS',()=>{
-   it('Error checker for constructor',()=>{
-   expect(()=>new Point({x:'a'})).toThrow('the function should get number')
-   expect(()=>new Point({x:['acc','add']})).toThrow('the function should get number')
-   expect(()=>new Point({y:true})).toThrow('the function should get number')
-   expect(()=>new Point({y:(v)=>v})).toThrow('the function should get number')
-   expect(()=>new Point({x:()=>false})).toThrow('the function should get number')
 
-})
-})
 
 

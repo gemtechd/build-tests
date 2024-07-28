@@ -18,16 +18,48 @@ const calculateDistance = (point1, point2) => {
 const calculateJunctionPoint = (line1, line2) => {
 
     if(line1===undefined||line2===undefined){
-        throw new Error('the function must get an arguments') 
+        throw new Error('the function must get line1 and line2') 
 
     }
-    if((!(line1 instanceof Line)) || (!(line2 instanceof Line))){
-        throw new Error("the arguments is not instance of 'Line'") 
+    if((!(line1 instanceof Line)) && (!(line2 instanceof Line))){
+        throw new Error("line1 and line2 should be of type 'Line'") 
     }
+    if((!(line1 instanceof Line))){
+        throw new Error("line1 should be of type 'Line'") 
+    }
+    if((!(line2 instanceof Line))){
+        throw new Error("line2 should be of type 'Line'") 
+    }
+   
+   
     
+
+    if(line1.slope===undefined){
+        line1.calculateSlope()
+    }
+    if(line2.slope===undefined){
+        line2.calculateSlope()
+    }
+    if(line1.n===undefined){
+        line1.calculateNOfLineFunction()
+
+    }
+    if(line2.n===undefined){
+        line2.calculateNOfLineFunction()
+    }
+ 
+ 
+    // if(line1.n===undefined){
+
+    // }
+    // if(line2.n===undefined){
+        
+    // }
+    
+
     if (line1.slope === line2.slope) {
         if (line1.n === line2.n) {
-            return true
+              return true
         }
         else {
             return false
@@ -39,11 +71,21 @@ const calculateJunctionPoint = (line1, line2) => {
         return junctionPoint
     }
 }
-
 const isPointOnLine = (line, point) => {
-    if(line===undefined||point===undefined){
+    
+    if(line===undefined && point===undefined){
         throw new Error('the function must get an two arguments') 
     }
+    
+    if(line===undefined){
+        throw new Error('the function must accept a line') 
+    }
+
+    if(point===undefined){
+        throw new Error('the function must accept a point') 
+
+    }
+    
     if(!(line instanceof Line)){
         throw new Error("the arguments is not instance of 'line'") 
 
@@ -53,8 +95,14 @@ const isPointOnLine = (line, point) => {
 
     }
 
+    if(line.slope === undefined){
+        line.calculateSlope()
+    }
+
+
     const proxyLine = new Line({ point1: line.point1, point2: point })
     proxyLine.calculateSlope()
+   
     if (line.slope === proxyLine.slope) {
         proxyLine.calculateNOfLineFunction()
         if (line.n === proxyLine.n) {

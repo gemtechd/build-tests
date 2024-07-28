@@ -2,9 +2,14 @@ const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
-        if((!(point1 instanceof(Point))) || (!(point2 instanceof Point))){
-            throw new Error("The entered arguments is not valid!") 
+        if(!(point1 instanceof Point)){
+            throw new Error("The entered argument  point1 is not valid!") 
         }
+        if (!(point2 instanceof Point)){
+            throw new Error("The entered argument point2 is not valid!") 
+        }
+        
+
         if(typeof(slope)!=="undefined" && typeof(slope)!=="number"){
             throw new Error("slop should get a number") 
         }
@@ -18,7 +23,11 @@ class Line {
     }
 
     calculateSlope = () => {
+        // if(this.point1.x - this.point2.x==0){
+        //     throw new Error("it is impossible to divide by 0")
+        // }
         this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
+        
     }
 
     calculateNOfLineFunction = () => {
@@ -27,6 +36,7 @@ class Line {
 
     getPointOnXAsis() {
         return this.getPointByY(0)
+
     }
 
     getPointOnYAsis() {
