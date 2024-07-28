@@ -1,7 +1,7 @@
 const Point = require('../../../modules/ecs6-class/point')
-let mypoint = new Point()
 
 describe('POINT_CONSTRUCTOR', () => {
+    let mypoint = new Point()
     it('should check the point object', () => {
         expect(mypoint.x).toBe(0)
         expect(mypoint.y).toBe(0)
@@ -40,6 +40,7 @@ describe('MOVE_VERTICAL', () => {
     })
 
     describe('ERROR', () => {
+        let mypoint = new Point()
         it('should throw error if the function not get/get a valid argument', () => {
             expect(() => mypoint.moveVertical(a => (a))).toThrow('the value is not a number!')
             expect(() => mypoint.moveVertical(true)).toThrow('the value is not a number!')
@@ -65,6 +66,7 @@ describe('MOVE_HORIZONTAL', () => {
     })
 
     describe('ERROR', () => {
+        let mypoint = new Point()
         it('should throw error if the function not get/get a valid argument', () => {
             expect(() => mypoint.moveHorizontal(v => (v))).toThrow('the value is not a number!')
             expect(() => mypoint.moveHorizontal(true)).toThrow('the value is not a number!')

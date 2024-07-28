@@ -54,7 +54,6 @@ const calculateJunctionPoint = (line1, line2) => {
         return junctionPoint
     }
 }
-
 const isPointOnLine = (line, point) => {
     if(line===undefined || point===undefined){
         throw new Error('the function must get an arguments: line and point!')

@@ -2,22 +2,16 @@ const Line = require("../../modules/ecs6-class/line")
 const Point = require("../../modules/ecs6-class/point")
 const { calculateDistance, calculateJunctionPoint, isPointOnLine } = require("../../modules/geometry-calculation")
 
-let point1 = new Point({ x: 4, y: 3 })
-let point2 = new Point({ x: 3, y: 2 })
-let point3 = new Point({ x: 2, y: 2 })
-let point4 = new Point({ x: 2, y: 1 })
-let point5 = new Point({ x: 2, y: 2 })
-let point6 = new Point({ x: 1, y: 1 })
 
-let line1 = new Line({ point1, point2, slope: 2, n: 3 })
-let line2 = new Line({ point3, point4, slope: 2, n: 5 })
-let line3 = new Line({ point3, point4, slope: 4, n: 3 })
-let line4 = new Line({ point5, point6, slope: 1, n: 0 })
-let line5 = new Line({ point5, point4, slope: 1, n: 3 })
-let line6 = new Line({ point5, point4, slope: 1, n: 3 })
 
 describe('CALCULATE_DISTANCE', () => {
-    it('return the sqrt for distance to point1 with point2', () => {
+    let point1 = new Point({ x: 4, y: 3 })
+    let point2 = new Point({ x: 3, y: 2 })
+    let point3 = new Point({ x: 2, y: 2 })
+    let point4 = new Point({ x: 2, y: 1 })
+    let line1 = new Line({ point1, point2, slope: 2, n: 3 })
+    let line2 = new Line({ point3, point4, slope: 2, n: 5 })
+    it(' should return the distance between two points', () => {
         expect(calculateDistance(point1, point2)).toBe(1.4142135623730951)
     })
     describe('ERROR', () => {
@@ -40,11 +34,20 @@ describe('CALCULATE_DISTANCE', () => {
 })
 
 describe('CALCULATE_JUNCTION_POINT', () => {
-    it('should return true if the slope and the n equal in line1 and line2', () => {
+    let point1 = new Point({ x: 4, y: 3 })
+    let point2 = new Point({ x: 3, y: 2 })
+    let point3 = new Point({ x: 2, y: 2 })
+    let point4 = new Point({ x: 2, y: 1 })
+    let point5 = new Point({ x: 2, y: 2 })
+    let line1 = new Line({ point1, point2, slope: 2, n: 3 })
+    let line2 = new Line({ point3, point4, slope: 2, n: 5 })
+    let line3 = new Line({ point3, point4, slope: 4, n: 3 })
+    let line6 = new Line({ point5, point4, slope: 1, n: 3 })
+
+    it('should return true when both lines are the same', () => {
         expect(calculateJunctionPoint(line1, line1)).toBe(true)
     })
-
-    it('should return false if the slope equal and the n not in line1 and line2', () => {
+    it('should return false if both lines are parallel', () => {
         expect(calculateJunctionPoint(line1, line2)).toBe(false)
     })
 
@@ -82,6 +85,17 @@ describe('CALCULATE_JUNCTION_POINT', () => {
 })
 
 describe('IS_POINT_ON_LINE', () => {
+    let point1 = new Point({ x: 4, y: 3 })
+    let point2 = new Point({ x: 3, y: 2 })
+    let point3 = new Point({ x: 2, y: 2 })
+    let point4 = new Point({ x: 2, y: 1 })
+    let point5 = new Point({ x: 2, y: 2 })
+    let point6 = new Point({ x: 1, y: 1 })
+    let line1 = new Line({ point1, point2, slope: 2, n: 3 })
+    let line2 = new Line({ point3, point4, slope: 2, n: 5 })
+    let line4 = new Line({ point5, point6, slope: 1, n: 0 })
+    let line5 = new Line({ point5, point4, slope: 1, n: 3 })
+    let line6 = new Line({ point5, point4, slope: 1, n: 3 })
     it('should return true if the point on line', () => {
         expect(isPointOnLine(line4, point6)).toBe(true)
     })
@@ -93,14 +107,14 @@ describe('IS_POINT_ON_LINE', () => {
         expect(isPointOnLine(line1, point1)).toBe(false)
     })
 
-    it('mock function on "isPointOnLine" function',()=>{
+    it('mock function on "isPointOnLine" function', () => {
         jest.spyOn(line6, 'calculateSlope').mockImplementation((x) => {
             return { x, y: 0 };
         });
         jest.spyOn(line6, 'calculateNOfLineFunction').mockImplementation((x) => {
             return { x, y: 0 };
         });
-        const points = isPointOnLine(line6,point6);
+        const points = isPointOnLine(line6, point6);
         expect(points).toEqual(false);
     })
 
