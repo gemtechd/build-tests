@@ -36,6 +36,15 @@ describe('POINT_CLASS', () => {
             expect(p1.y).toBe(0)
 
         })
+        it('should throw an error if x or y are not numbers',()=>{
+  
+         
+            expect(()=>new Point({x:{},y:{}})).toThrow('x and y must be numbers')
+            expect(()=>new Point({x:[1],y:[2]})).toThrow('x and y must be numbers')
+            expect(()=>new Point({x:'1',y:'5'})).toThrow('x and y must be numbers')
+
+
+        })
     })
 
     describe('moveVertical', () => {

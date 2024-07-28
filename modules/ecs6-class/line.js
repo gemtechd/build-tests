@@ -2,17 +2,21 @@ const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }={}) {
+        if(!(point1 instanceof Point) || !(point2 instanceof Point)){
+            throw new Error('points must be instances of point')
+        }
+       
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
-        this.n = n;
+        this.n = n
     }
 
-    calculateSlope = () => {
+    calculateSlope () {
         this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
     }
 
-    calculateNOfLineFunction = () => {
+    calculateNOfLineFunction(){
         this.n = this.point1.y - this.slope * this.point1.x
     }
 

@@ -44,6 +44,7 @@ const isPointOnLine = (line, point) => {
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
         proxyLine.calculateNOfLineFunction()
+
         if (line.n === proxyLine.n) {
             return true
         }

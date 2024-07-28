@@ -1,12 +1,7 @@
-class Point {
-    constructor({x=0, y=0}={}) {
-        if(typeof(x)!='number'||typeof(y)!=='number'){    
-                throw new Error('x and y must be numbers')
-                        }
-        this.x =x;
-        this.y =  y;
-      
-      
+class MockPoint {
+    constructor() {
+        this.x = 0;
+        this.y = 0;
     }
     moveVertical(value=0 ) {
         if(typeof(value)!='number'){
@@ -22,5 +17,4 @@ class Point {
     }
 }
 
-module.exports = Point;
-
+module.exports = MockPoint;
