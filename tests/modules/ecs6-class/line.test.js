@@ -1,6 +1,16 @@
 const Line  = require('../../../modules/ecs6-class/line')
 const Point = require('../../../modules/ecs6-class/point')
 
+let mockCalculatSlope = jest.fn()
+
+// jest.mock('../../modules/ecs6-class/line',()=>{
+//    return{
+//       calculateSlope:mockCalculatSlope
+//    }
+// })
+
+// mockCalculatSlope.mockImplementation()
+
 describe('CONSTRUCTOR',() => {
     it('should build an object with default values',() => {
         const line = new Line({slope:5,n:4})
@@ -8,11 +18,19 @@ describe('CONSTRUCTOR',() => {
         expect(line.n).toBe(4)
         expect(line.point1.x).toBe(0)
     })
-    it('should build an object with default values',() => {
+    it('An error should be thrown when the point1 is not of type Point',() => {
         expect(()=> new Line({point1:[],point2:new Point({x:2,y:2})})).toThrowError('the type of point1 is not Point')
     })
-    it('should build an object with default values',() => {
+    
+    it('An error should be thrown when the point2 is not of type Point',() => {
         expect(()=> new Line({point1:new Point({x:2,y:2}),point2:[]})).toThrowError('the type of point2 is not Point')
+    })
+
+    it('An error should be thrown when the slope is not of type number',() => {
+        expect(()=> new Line({point1:new Point({x:2,y:2,}),point2:new Point({x:2,y:2}),slope:'a'})).toThrowError('the type of slope is not number')
+    })
+    it('An error should be thrown when the n is not of type number',() => {
+        expect(()=> new Line({point1:new Point({x:2,y:2}),point2:new Point({x:2,y:2}),n:'a'})).toThrowError('the type of n is not number')
     })
 })
 

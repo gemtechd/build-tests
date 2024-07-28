@@ -6,11 +6,17 @@ class Line {
           if((point2 instanceof Point)){
             this.point1 = point1;
             this.point2 = point2;
-            this.slope = slope;
-            this.n = n;
+            if(typeof slope === 'number' || typeof slope === 'undefined')
+               this.slope = slope;
+            else
+              throw new Error('the type of slope is not number');
+            if(typeof n === 'number' || typeof n === 'undefined')
+               this.n = n;
+            else
+              throw new Error('the type of n is not number');
     }
-    else{
-        throw new Error('the type of point2 is not Point')}
+    else
+        throw new Error('the type of point2 is not Point')
     else
         throw new Error('the type of point1 is not Point')
     }

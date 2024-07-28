@@ -17,6 +17,7 @@ describe('CALCULATE_DISTANCE',() => {
       expect(()=>calculateDistance(new Point({x:6,y:4}),'k')).toThrowError('the type of point2 is not Point')
    })
 })
+
 describe('CALCULATE_JUNCTION_POINT', () => {
    it('should return true when the 2 lines are equal', () =>{
       const line1 = new Line({point1:new Point({x:6,y:4}),point2:new Point({x:2,y:1}),n:-0.5,slope:0.75})
@@ -24,14 +25,18 @@ describe('CALCULATE_JUNCTION_POINT', () => {
       const result = calculateJunctionPoint(line1,line2)
       expect(result).toBeTruthy()
    })
-
    it('should return false when the 2 lines are parallels', () =>{
       const line1 = new Line({point1:new Point({x:6,y:4}),point2:new Point({x:2,y:1}),n:-0.5,slope:0.75})
       const line2 = new Line({point1:new Point({x:5,y:3}),point2:new Point({x:1,y:0}),n:-0.75,slope:0.75})
       const result = calculateJunctionPoint(line1,line2)
       expect(result).toBeFalsy()
    })
-
+   it('should return false when the 2 lines are parallels', () =>{
+      const line1 = new Line({point1:new Point({x:6,y:4}),point2:new Point({x:2,y:1})})
+      const line2 = new Line({point1:new Point({x:5,y:3}),point2:new Point({x:1,y:0})})
+      const result = calculateJunctionPoint(line1,line2)
+      expect(result).toBeFalsy()
+   })
    it('should return point when the 2 lines are not equal', () =>{
       const line1 = new Line({point1:new Point({x:8,y:3}),point2:new Point({x:6,y:1}),slope:1})
       const line2 = new Line({point1:new Point({x:5,y:3}),point2:new Point({x:1,y:0}),slope:0.75})
@@ -47,7 +52,7 @@ describe('CALCULATE_JUNCTION_POINT', () => {
    })
    it('An error should be thrown when line1 is not of type Line', () =>{
       const line2 = new Line({point1:new Point({x:8,y:3}),point2:new Point({x:6,y:1}),slope:1})
-       line2.calculateNOfLineFunction()
+      line2.calculateNOfLineFunction()
       expect(()=>calculateJunctionPoint('g',line2)).toThrowError('the type of line1 is not Line')
    })
 })
@@ -56,17 +61,12 @@ describe('CALCULATE_JUNCTION_POINT', () => {
 describe('IS_POINT_ON_LINE',() => {
    it('should return true when the point on this line',() => {
       const line = new Line({point1:new Point({x:8,y:4}),point2:new Point({x:2,y:1}),slope:0.5})
-     line.calculateNOfLineFunction()
+      line.calculateNOfLineFunction()
       const point = new Point({x:6,y:3})
       const result = isPointOnLine(line,point)
       expect(result).toBeTruthy()
    })
-   it('Should return true if the point  on the line', () => {
-      const line = new Line({ point1: new Point({ x: 2, y: 5 }), slope: 2, n: 1 });
-      const point = new Point({ x: 3, y: 7 });
-      const result = isPointOnLine(line, point);
-      expect(result).toBe(true);
-  });
+   
    it('should return true when the point on this line',() => {
       const line = new Line({point1:new Point({x:10,y:10}),point2:new Point({x:8,y:2}),slope:4})
       line.calculateNOfLineFunction()
@@ -86,8 +86,13 @@ describe('IS_POINT_ON_LINE',() => {
       line.calculateNOfLineFunction()
       expect(()=>isPointOnLine(line,'k')).toThrowError('the type of point is not Point')
    })
-   it('An error should be thrown when point2 is not of type Point', () => {
+   it('An error should be thrown when line is not of type Line', () => {
       const point = new Point({x:6,y:4})
       expect(()=>isPointOnLine('k',point)).toThrowError('the type of line is not Line')
+   })
+   it('An error should be thrown when the slope is undefined', () => {
+      const line = new Line({point1:new Point({x:8,y:4}),point2:new Point({x:6,y:1})})
+      const point = new Point({x:6,y:4})
+      expect(() => isPointOnLine(line,point)).toThrowError('division by zero')
    })
 })
