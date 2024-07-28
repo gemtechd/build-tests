@@ -5,13 +5,19 @@ class Line {
         if (!(point1 instanceof Point) || !(point2 instanceof Point)) {
             throw new Error('InvalidPointError: point1 and point2 must be instances of Point');
         }
+        if (typeof(n)!=="number"&&n!=undefined) {
+            throw new Error('InvalidError: n must be a number');
+        }
+        if (typeof(slope)!=="number"&&slope!=undefined) {
+            throw new Error('InvalidError: slope must be a number');
+        }
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
         this.n = n;
     }
 
-    calculateSlope = () => {
+    calculateSlope ()  {
         if (this.point1.x === this.point2.x) {
             throw new Error('UndefinedSlopeError: Slope is undefined for vertical lines');
         }

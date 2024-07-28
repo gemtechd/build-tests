@@ -9,10 +9,41 @@ describe('Line class', () => {
         expect(line.slope).toBeUndefined();
         expect(line.n).toBeUndefined();
     });
+    test('should create a line with selected values and undefined slope and n', () => {
+        const point1=new Point({x:5,y:3});
+        const point2=new Point({x:4,y:6});
+        const line = new Line({point1:point1,point2:point2});
+        expect(line.point1).toEqual(point1);
+        expect(line.point2).toEqual(point2);
+        expect(line.slope).toBeUndefined();
+        expect(line.n).toBeUndefined();
+    });
+    test('should create a line with selected values', () => {
+        const point1=new Point({x:5,y:3});
+        const point2=new Point({x:4,y:6});
+        const line = new Line({point1:point1,point2:point2,n:5,slope:3});
+        expect(line.point1).toEqual(point1);
+        expect(line.point2).toEqual(point2);
+        expect(line.slope).toEqual(3);
+        expect(line.n).toEqual(5);
+    });
 
     test('should throw an error for invalid point1 or point2', () => {
         expect(() => new Line({ point1: {}, point2: new Point() })).toThrow('InvalidPointError: point1 and point2 must be instances of Point');
         expect(() => new Line({ point1: new Point(), point2: {} })).toThrow('InvalidPointError: point1 and point2 must be instances of Point');
+    });
+
+    test('should throw an error for invalid n ', () => {
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:'n',slope:5})).toThrow('InvalidError: n must be a number');
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:{},slope:5})).toThrow('InvalidError: n must be a number');
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:[],slope:5})).toThrow('InvalidError: n must be a number');
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:true,slope:5})).toThrow('InvalidError: n must be a number');
+    });
+    test('should throw an error for invalid slope ', () => {
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:5,slope:{}})).toThrow('InvalidError: slope must be a number');
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:5,slope:'5'})).toThrow('InvalidError: slope must be a number');
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:5,slope:[]})).toThrow('InvalidError: slope must be a number');
+        expect(() => new Line({ point1: new Point(), point2: new Point() ,n:5,slope:true})).toThrow('InvalidError: slope must be a number');
     });
     describe('calculateSlope', () => {
         test('should calculate the slope of the line', () => {
@@ -58,18 +89,16 @@ describe('Line class', () => {
        
     
         test('should handle horizontal lines correctly by throwing an error', () => {
-            // Create a horizontal line (slope = 0)
             const point1 = new Point({ x: 1, y: 0 });
             const point2 = new Point({ x: 3, y: 0 });
     
             const line = new Line({
                 point1: point1,
                 point2: point2,
-                slope: 0,  // Correct the slope for horizontal line
+                slope: 0,  
                 n: 0
             });
     
-            // Expect the function to throw an error since horizontal lines don't have an x-intercept
             expect(() => line.getPointOnXAsis()).toThrow('InvalidSlopeError: Slope cannot be zero for calculating X by Y');
         });
         test('should throw an error for undefined slope (vertical line)', () => {
