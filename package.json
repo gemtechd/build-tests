@@ -19,8 +19,6 @@
   },
   "homepage": "https://github.com/gemtechd/build-tests#readme",
   "author": "gemtechd",
-  "license": "ISC",
-  "devDependencies": {
-    "jest-junit": "^16.0.0"
-  }
+  "license": "ISC"
+
 }

@@ -2,13 +2,20 @@ const  Line = require('../../../modules/ecs6-class/line');
 const Point = require('../../../modules/ecs6-class/point');
 let line;
 describe('constructor', () => {
+    it('should be ok when all paramter is ok', () => {
+        line = new Line({ point1: new Point(1, 2), point2: new Point(4, 5), n: 4, slope: 7 });
+        expect(line.point1).toEqual(new Point(1, 2));
+        expect(line.point2).toEqual(new Point(4, 5))
+        expect(line.n).toBe(4);
+        expect(line.slope).toBe(7);
+    });
     it('should throw error when point1 isnt object or point2 isnt object or n isnt number or slope isnt number  ', () => {
         expect(() => new Line({ point1: 'p', point2: new Point(1, 2), n: 5, slope: 4 })).toThrow('point1 must be Point objects')
         expect(() => new Line({ point1: new Point(1, 2), point2: '4', n: 5, slope: 4 })).toThrow('point2 must be Point objects')
         expect(() => new Line({ point1: new Point(1, 2), point2: new Point(1, 2), n: "invalid", slope: 4 })).toThrow('n must be a number');
         expect(() => new Line({ point1: new Point(1, 2), point2: new Point(1, 2), n: 4, slope: "invalid" })).toThrow('slope must be a number');
     });
-    it('all isnt undefined', () => {
+    it('Not everything exists', () => {
         line = new Line({ point1: new Point(1, 2) });
         expect(line.point1).toEqual(new Point(1, 2));
         expect(line.point2).toEqual({ x: 0, y: 0 });
@@ -29,11 +36,6 @@ describe('constructor', () => {
         expect(line.point2).toEqual({ x: 0, y: 0 });
         expect(line.n).toBe(undefined);
         expect(line.slope).toBe(7);
-        line = new Line({ point1: new Point(1, 2), point2: new Point(4, 5), n: 4, slope: 7 });
-        expect(line.point1).toEqual(new Point(1, 2));
-        expect(line.point2).toEqual(new Point(4, 5))
-        expect(line.n).toBe(4);
-        expect(line.slope).toBe(7);
     });
 });
 
@@ -42,14 +44,14 @@ describe('calculateSlope', () => {
         line = (new Line({ point1: (new Point({ x: 1, y: 2 })), point2: (new Point({ x: 1, y: 10 })), n: 5, slope: 4 }))
         expect(() => { line.calculateSlope() }).toThrow('cut with zero');
     })
-    it('should be 3 when all is good', () => {
+    it('The slope should be calculated correctly for different points with a positive slope', () => {
         line = (new Line({ point1: (new Point({ x: 10, y: 12 })), point2: (new Point({ x: 7, y: 3 })), n: 3, slope: 7 }));
         line.calculateSlope()
         expect(line.slope).toBe(3);
     })
 });
 describe('calculateNOfLineFunction', () => {
-    it('should be 3 when all is good', () => {
+    it('Should be the value of the point where the line intersects the y-axis.', () => {
         line = (new Line({ point1: (new Point({ x: 2, y: 7 })), point2: (new Point({ x: 5, y: 3 })), n: 2, slope: 2 }));
         line.calculateNOfLineFunction()
         expect(line.n).toBe(3);
