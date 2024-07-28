@@ -29,12 +29,8 @@ describe("CALCULATE_DISTANCE", function () {
             expect(function () { calculateDistance(2, "uioyi") }).toThrow(new Error("argument must by type point"))
             expect(function () { calculateDistance(2, [1, 2, 3]) }).toThrow(new Error("argument must by type point"))
             expect(function () { calculateDistance([1, 2, 3], 1) }).toThrow(new Error("argument must by type point"))
-
         })
-
     })
-
-
 });
 
 
@@ -43,12 +39,8 @@ describe("CALCULATE_JUNCTION_POINT", function () {
         const px = new Point({ x: 4, y: 3 })
         const py = new Point({ x: 5, y: 6 })
         const pz = new Point({ x: 3, y: 7 })
-        const line1 = new Line({ point1: px, point2: py })
-        const line2 = new Line({ point1: py, point2: pz })
-        line1.calculateSlope()
-        line1.calculateNOfLineFunction()
-        line2.calculateSlope()
-        line2.calculateNOfLineFunction()
+        const line1 = new Line({ point1: px, point2: py, slope: 3, n: -9 })
+        const line2 = new Line({ point1: py, point2: pz, slope: -0.5, n: 8.5 })
         expect(calculateJunctionPoint(line1, line2)).toStrictEqual(new Point({ x: 5, y: 6 }));
     })
     it("should returen false if not contain a junction point ", function () {
@@ -72,8 +64,6 @@ describe("CALCULATE_JUNCTION_POINT", function () {
             expect(function () { calculateJunctionPoint() }).toThrow("missing data")
         })
     })
-
-
 });
 
 describe("IS_POINT_IN_LINE", function () {

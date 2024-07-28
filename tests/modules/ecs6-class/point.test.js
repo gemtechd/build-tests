@@ -1,9 +1,17 @@
 const Point = require("../../../modules/ecs6-class/point");
 
 describe("POINT", function () {
+    it("should return the values  of point", function () {
+        const px = new Point({ x: 4, y: 3 })
+        expect(px).toStrictEqual(new Point({ x: 4, y: 3 }))
+    })
     it("should return the value x of point", function () {
         const px = new Point({ x: 4, y: 3 })
         expect(px.x).toBe(4);
+    })
+    it("should return the value y of point", function () {
+        const px = new Point({ x: 4, y: 3 })
+        expect(px.y).toBe(3);
     })
     it("should return the value x of point after the move horizontal", function () {
         const px = new Point({ x: 4, y: 3 })
@@ -17,10 +25,14 @@ describe("POINT", function () {
     })
     describe("EERORS", function () {
         it("should return error if argument is not number", function () {
-            expect(function () { new Point({ x: "rtry" }) }).toThrow(new Error("argument must be type number"))
-            expect(function () { new Point({ x: true }) }).toThrow(new Error("argument must be type number"))
-            expect(function () { new Point({ x: () => { } }) }).toThrow(new Error("argument must be type number"))
-            expect(function () { new Point({ x: [1, 2] }) }).toThrow(new Error("argument must be type number"))
+            expect(function () { new Point({ x: "rtry" }) }).toThrow(new Error("argument x must be type number"))
+            expect(function () { new Point({ x: true }) }).toThrow(new Error("argument x must be type number"))
+            expect(function () { new Point({ x: () => { } }) }).toThrow(new Error("argument x must be type number"))
+            expect(function () { new Point({ x: [1, 2] }) }).toThrow(new Error("argument x must be type number"))
+            expect(function () { new Point({ y: "rtry" }) }).toThrow(new Error("argument y must be type number"))
+            expect(function () { new Point({ y: true }) }).toThrow(new Error("argument y must be type number"))
+            expect(function () { new Point({ y: () => { } }) }).toThrow(new Error("argument y must be type number"))
+            expect(function () { new Point({ y: [1, 2] }) }).toThrow(new Error("argument y must be type number"))
         })
 
     })
@@ -43,5 +55,4 @@ describe("POINT", function () {
             expect(function () { px.moveHorizontal([1, 2]) }).toThrow(new Error("argument must be type number"))
         })
     })
-
 });

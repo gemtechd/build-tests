@@ -5,8 +5,11 @@ class Line {
         if (!(point1 instanceof Point) || !(point2 instanceof Point)) {
             throw new Error('argument must be type point')
         }
-        if (typeof (n) != "number" && n !== undefined || typeof (slope) !== "number" && slope != undefined) {
-            throw new Error('argument must be type number')
+        if (typeof (n) != "number" && n !== undefined) {
+            throw new Error('argument n must be type number')
+        }
+        if (typeof (slope) !== "number" && slope != undefined) {
+            throw new Error('argument slope must be type number')
         }
         this.point1 = point1;
         this.point2 = point2;
@@ -15,9 +18,6 @@ class Line {
     }
 
     calculateSlope = () => {
-        if (this.point1.x == this.point1.y && this.point1.y == 0 || this.point2.x == this.point2.y && this.point2.y == 0) {
-            throw new Error("attribute is undefined")
-        }
         this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
     }
 
@@ -41,8 +41,11 @@ class Line {
         if (typeof (x) != "number") {
             throw new Error('argument must be type number')
         }
-        if (!this.n || !this.slope) {
-            throw new Error("missing argument")
+        if (!this.n) {
+            this.calculateNOfLineFunction()
+        }
+        if (!this.slope) {
+            this.calculateSlope()
         }
         let y = this.slope * x + this.n
         return new Point({ x, y })

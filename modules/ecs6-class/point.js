@@ -1,7 +1,10 @@
 class Point {
     constructor({ x = 0, y = 0 } = {}) {
-        if (typeof (x) !== "number" || typeof (y) !== "number") {
-            throw new Error('argument must be type number')
+        if (typeof (x) !== "number") {
+            throw new Error('argument x must be type number')
+        }
+        if (typeof (y) !== "number") {
+            throw new Error('argument y must be type number')
         }
         this.x = x;
         this.y = y;
