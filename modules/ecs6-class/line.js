@@ -26,16 +26,17 @@ class Line {
             throw Error("it isn't a real geometry line")
         }
         else {
-
-            return this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
-
+            this.slope = (this.point1.y - this.point2.y) / (this.point1.x - this.point2.x)
         }
 
     }
 
     calculateNOfLineFunction() {
-        this.calculateSlope()
-        return this.n = this.point1.y - this.slope * this.point1.x
+        if (!this.slope) {
+            this.calculateSlope()
+
+        }
+        this.n = this.point1.y - this.slope * this.point1.x
 
 
     }
@@ -53,8 +54,14 @@ class Line {
         if (typeof (x) !== 'number') {
             throw Error('The value is of an invalid type')
         }
+        if (!this.slope) {
             this.calculateSlope()
+
+        }
+        if (!this.n) {
             this.calculateNOfLineFunction()
+        }
+
         let y = this.slope * x + this.n
         return new Point({ x, y })
     }
@@ -63,9 +70,14 @@ class Line {
         if (typeof (y) !== 'number') {
             throw Error('The value is of an invalid type')
         }
-        this.calculateSlope()
-        this.calculateNOfLineFunction()
-        if(this.slope===0){
+        if (!this.slope) {
+            this.calculateSlope()
+        }
+        if (!this.n) {
+            this.calculateNOfLineFunction()
+        }
+
+        if (this.slope === 0) {
             throw Error('The slope cannot be 0')
         }
         let x = (y - this.n) / this.slope;

@@ -3,18 +3,18 @@ const Point = require('../../modules/ecs6-class/point');
 const geometry = require('../../modules/geometry-calculation')
 
 
-const getPointByXMock = jest
-    .spyOn(Line.prototype, 'getPointByX').mockImplementation()
-    .mockReturnValue({ x: -7, y: -40 })
+// const getPointByXMock = jest
+//     .spyOn(Line.prototype, 'getPointByX').mockImplementation()
+//     .mockReturnValue({ x: -7, y: -40 })
 
-const calculateSlopeMock = jest
-    .spyOn(Line.prototype, 'calculateSlope').mockImplementation()
-    .mockReturnValueOnce(0).mockReturnValueOnce(7).mockReturnValue(7)
+// const calculateSlopeMock = jest
+//     .spyOn(Line.prototype, 'calculateSlope').mockImplementation()
+//     .mockReturnValueOnce(0).mockReturnValueOnce(7).mockReturnValue(7)
 
 
-const calculateNOfLineFunctionMock = jest
-    .spyOn(Line.prototype, 'calculateNOfLineFunction').mockImplementation()
-    .mockReturnValue(9)
+// const calculateNOfLineFunctionMock = jest
+//     .spyOn(Line.prototype, 'calculateNOfLineFunction').mockImplementation()
+//     .mockReturnValue(9)
 
 
 
@@ -44,7 +44,7 @@ describe('Check calculateJunctionPoint function', () => {
         let point3 = new Point({ x: 7, y: 0 });
         let point4 = new Point({ x: 11, y: 8 });
         let line1 = new Line({ point1, point2, n: 9, slope: 7 });
-        let line2 = new Line({ point3, point4, n: 2, slope: 6 });
+        let line2 = new Line({ point1:point3, point2:point4, n: 2, slope: 6 });
         expect(geometry.calculateJunctionPoint(line1, line2)).toEqual({ x: -7, y: -40 });
 
     })
@@ -55,7 +55,7 @@ describe('Check calculateJunctionPoint function', () => {
         let point3 = new Point({ x: 7, y: 0 });
         let point4 = new Point({ x: 11, y: 8 });
         let line1 = new Line({ point1, point2, n: 9, slope: 7 });
-        let line2 = new Line({ point3, point4, n: 9, slope: 7 });
+        let line2 = new Line({point1: point3, point2:point4, n: 9, slope: 7 });
         expect(geometry.calculateJunctionPoint(line1, line2)).toBe(true);
     })
 
@@ -65,9 +65,49 @@ describe('Check calculateJunctionPoint function', () => {
         let point3 = new Point({ x: 7, y: 0 });
         let point4 = new Point({ x: 11, y: 8 });
         let line1 = new Line({ point1, point2, n: 9, slope: 7 });
-        let line2 = new Line({ point3, point4, n: 2, slope: 7 });
+        let line2 = new Line({ point1: point3, point2: point4, n: 2, slope: 7 });
         expect(geometry.calculateJunctionPoint(line1, line2)).toBe(false);
     })
+    test('Should return answer and computer the slpoe of line1 if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let point3 = new Point({ x: 7, y: 0 });
+        let point4 = new Point({ x: 11, y: 8 });
+        let line1 = new Line({ point1, point2, n: 9 });
+        let line2 = new Line({ point1: point3, point2: point4, n: 2, slope: -0.5 });
+        expect(geometry.calculateJunctionPoint(line1, line2)).toBe(false);
+    })
+
+    test('Should return answer and computer the slpoe of line2 if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let point3 = new Point({ x: 7, y: 0 });
+        let point4 = new Point({ x: 11, y: 8 });
+        let line1 = new Line({ point1, point2, n: 9, slope: 2 });
+        let line2 = new Line({ point1: point3, point2: point4, n: 2 });
+        expect(geometry.calculateJunctionPoint(line1, line2)).toBe(false);
+    })
+
+    test('Should return answer and computer the n of line1 if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let point3 = new Point({ x: 7, y: 0 });
+        let point4 = new Point({ x: 11, y: 8 });
+        let line1 = new Line({ point1, point2, slope: 7 });
+        let line2 = new Line({ point1: point3, point2: point4, n: 2, slope: 7 });
+        expect(geometry.calculateJunctionPoint(line1, line2)).toBe(false);
+    })
+
+    test('Should return answer and computer the n of line2 if it is not sent', () => {
+        let point1 = new Point({ x: 5, y: 7 });
+        let point2 = new Point({ x: 3, y: 8 });
+        let point3 = new Point({ x: 7, y: 0 });
+        let point4 = new Point({ x: 11, y: 8 });
+        let line1 = new Line({ point1, point2, n: 9, slope: 7 });
+        let line2 = new Line({ point1: point3, point2: point4, slope: 7 });
+        expect(geometry.calculateJunctionPoint(line1, line2)).toBe(false);
+    })
+
 
     describe('ERRORS', () => {
         test('should throw error when the values are not line', () => {

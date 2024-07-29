@@ -81,14 +81,14 @@ describe('Check getPointByX function', () => {
         let point1 = new Point({ x: 5, y: 7 });
         let point2 = new Point({ x: 3, y: 8 });
         let line1 = new Line({ point1, point2, slope: 2, n: 7 });
-        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 6.5 })
+        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 19 })
         
     })
     it('Should return point and computer the slpoe if it is not sent', () => {
         let point1 = new Point({ x: 5, y: 7 });
         let point2 = new Point({ x: 3, y: 8 });
         let line1 = new Line({ point1, point2, n: 7 });
-        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 6.5 })
+        expect(line1.getPointByX(6)).toEqual({ x: 6, y: 4 })
         expect(line1.slope).toBe(-0.5)
     })
     it('Should return point and computer the n if it is not sent', () => {
@@ -125,7 +125,7 @@ describe('Check getPointByY function', () => {
         let point1 = new Point({ x: 5, y: 7 });
         let point2 = new Point({ x: 3, y: 8 });
         let line1 = new Line({ point1,point2,slope: 2, n: 7 });
-        expect(line1.getPointByY(6)).toEqual({ x: 7, y: 6 })
+        expect(line1.getPointByY(6)).toEqual({ x: -0.5, y: 6 })
     })
     it('Should return point and computer the slpoe if it is not sent', () => {
         let point1 = new Point({ x: 5, y: 7 });

@@ -24,10 +24,20 @@ const calculateJunctionPoint = (line1, line2) => {
     if (!(line2 instanceof Line)) {
         throw Error('The second value is of an invalid type')
     }
-    line1.calculateSlope()
-    line2.calculateSlope()
-    line1.calculateNOfLineFunction()
-    line2.calculateNOfLineFunction()
+    if (!line1.slope) {
+        line1.calculateSlope()
+
+    }
+    if (!line2.slope) {
+        line2.calculateSlope()
+    }
+    if (!line1.n) {
+        line1.calculateNOfLineFunction()
+    }
+    if (!line2.n) {
+        line2.calculateNOfLineFunction()
+    }
+
     if (line1.slope === line2.slope) {
         if (line1.n === line2.n) {
             return true
@@ -38,7 +48,7 @@ const calculateJunctionPoint = (line1, line2) => {
     }
     else {
         const x = (line1.n - line2.n) / (line2.slope - line1.slope)
-        const junctionPoint=line1.getPointByX(x);
+        const junctionPoint = line1.getPointByX(x);
         return junctionPoint
     }
 }
@@ -49,9 +59,9 @@ const isPointOnLine = (line, point) => {
     }
 
     const proxyLine = new Line({ point1: line.point1, point2: point })
-    proxyLine.slope=proxyLine.calculateSlope()
+    proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
-        proxyLine.n=proxyLine.calculateNOfLineFunction()
+        proxyLine.calculateNOfLineFunction()
         if (line.n === proxyLine.n) {
             return true
         }
