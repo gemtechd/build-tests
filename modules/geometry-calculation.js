@@ -1,6 +1,9 @@
-const Line = require('./ecs6-class/line')
+const Line = require('./ecs6-class/line');
+const Point = require('./ecs6-class/point');
 
 const calculateDistance = (point1, point2) => {
+    if (point1 == undefined || point2 == undefined)
+        throw new Error('two points were not received')
     let distanceX = (point2.x - point1.x) ** 2;
     let distanceY = (point2.y - point1.y) ** 2;
     const distance = Math.sqrt(distanceX + distanceY);
@@ -8,8 +11,16 @@ const calculateDistance = (point1, point2) => {
 }
 
 const calculateJunctionPoint = (line1, line2) => {
-    // if(!line1 || !line2){
-    //throw("argument not give")}
+    if (!line1 || !line2)
+        throw ("It should take two arguments")
+    if (!line1.slope)
+        line1.calculateSlope()
+    if (!line1.n)
+        line1.calculateNOfLineFunction()
+    if (!line2.slope)
+        line2.calculateSlope()
+    if (!line2.n)
+        line2.calculateNOfLineFunction()
     if (line1.slope === line2.slope) {
         if (line1.n === line2.n) {
             return true
@@ -26,9 +37,15 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
-    // if(!line || !point){
-    //     throw ("not give argment")
-    // }
+
+    if (!line || !(line instanceof Line)) {
+        throw ("line were not received")
+    }
+    if (!point || !point instanceof Point) {
+        throw ("point were not received")
+    }
+    if (line.slope === undefined)
+        line.calculateSlope()
     const proxyLine = new Line({ point1: line.point1, point2: point })
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
