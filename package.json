@@ -4,9 +4,10 @@
   "description": "practice unit tests in javascript",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
+    "coverage": "",
     "jest": "^29.7.0"
   },
   "repository": {
@@ -19,5 +20,4 @@
   "homepage": "https://github.com/gemtechd/build-tests#readme",
   "author": "gemtechd",
   "license": "ISC"
-
 }
