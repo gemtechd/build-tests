@@ -4,7 +4,9 @@
   "description": "practice unit tests in javascript",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "coverage": "npm run test -- --coverage"
+
   },
   "dependencies": {
     "jest": "^29.7.0"
