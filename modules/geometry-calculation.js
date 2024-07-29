@@ -26,9 +26,9 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
-    if(!line || !point){
-        throw ("not give argment")
-    }
+    // if(!line || !point){
+    //     throw ("not give argment")
+    // }
     const proxyLine = new Line({ point1: line.point1, point2: point })
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
