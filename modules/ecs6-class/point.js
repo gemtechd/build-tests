@@ -3,11 +3,23 @@ class Point {
         this.x = x;
         this.y = y;
     }
-    moveVertical(value) {
-        this.y += value;
+    moveVertical(value) { 
+       if(typeof(value) == "number"){
+            this.y += value
+        }  
+        else{
+            throw new Error("Expect to get a number")
+        };
     }
+
     moveHorizontal(value) {
-        this.x += value;
+        if(typeof(value) == "number"){
+            this.x += value
+        } 
+        else{
+            throw new Error("Expect to get a number")
+
+        }; 
     }
 }
 

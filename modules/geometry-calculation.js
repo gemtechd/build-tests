@@ -1,13 +1,25 @@
 const Line = require('./ecs6-class/line')
 
 const calculateDistance = (point1, point2) => {
+    if((point1 == undefined && point2 == undefined) || point1==undefined || point2==undefined)
+    {
+        throw new Error("Expect to get two points")
+    }
     let distanceX = (point2.x - point1.x) ** 2;
-    let distanceY = (point2.y - point2.y) ** 2;
+    let distanceY = (point2.y - point1.y) ** 2;
     const distance = Math.sqrt(distanceX + distanceY);
     return distance;
 }
 
 const calculateJunctionPoint = (line1, line2) => {
+    if((line1 == undefined && line2 == undefined) || line1==undefined || line2==undefined)
+    {
+        throw new Error("Expect to get two lines")
+    }
+    if(line2.slope ==undefined || line1.slope==undefined)
+    {
+        throw new Error("Expect to get line with slope")
+    }
     if (line1.slope === line2.slope) {
         if (line1.n === line2.n) {
             return true
@@ -24,6 +36,10 @@ const calculateJunctionPoint = (line1, line2) => {
 }
 
 const isPointOnLine = (line, point) => {
+    if(point == undefined || line==undefined || (point == undefined && line==undefined))
+    {
+        throw new Error("Expect to get line and point")
+    }
     const proxyLine = new Line({ point1: line.point1, point2: point })
     proxyLine.calculateSlope()
     if (line.slope === proxyLine.slope) {
