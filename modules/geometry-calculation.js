@@ -1,6 +1,13 @@
-const Line = require('./ecs6-class/line')
+const Line = require('./ecs6-class/line');
+const Point = require('./ecs6-class/point');
 
 const calculateDistance = (point1, point2) => {
+    if (point1 == undefined || point2 == undefined) {
+        throw new Error("the function  calculateDistance must get 2 points")
+    }
+    if (!(point1 instanceof Point) || !(point2 instanceof Point)) {
+        throw new Error("the function calculateDistance must get 2 points of type Point")
+    }
     let distanceX = (point2.x - point1.x) ** 2;
     let distanceY = (point2.y - point1.y) ** 2;
     const distance = Math.sqrt(distanceX + distanceY);
@@ -8,9 +15,13 @@ const calculateDistance = (point1, point2) => {
 }
 
 const calculateJunctionPoint = (line1, line2) => {
-    
+    if (line1 == undefined || line2 == undefined)
+        throw new Error("the function  calculateJunctionPoint must get 2 lines")
 
-
+    if (!(line1 instanceof Line) || !(line2 instanceof Line)) {
+        throw new Error("the function calculateJunctionPoint must get 2 lines of type Line")
+    }
+   
     if (line1.slope === line2.slope) {
         if (line1.n === line2.n) {
             return true

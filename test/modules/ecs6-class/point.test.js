@@ -13,7 +13,7 @@ describe("POINT_FUNCTION", function () {
 
         })
     })
-    
+
     describe("MOVE_VERTICAL", function () {
         it("the function move point to up or down", function () {
             let p1 = new Point({ x: 1, y: 2 })
@@ -31,23 +31,23 @@ describe("POINT_FUNCTION", function () {
             expect(p1.y).toEqual(2)
         })
     })
-    describe("ERROR",function(){
+    describe("ERROR", function () {
 
-        it("the function must get argument",function(){
-            let p=new Point({x:3,y:4})
-            expect(()=>{p.moveVertical()}).toThrow("the function must get argument")
-            expect(()=>{p.moveHorizontal()}).toThrow("the function must get argument")
-
-        })
-        it("the function must get arguments from type number",function(){
-            let p=new Point({x:3,y:4})
-            expect(()=>{new Point({x:"x",y:"y"})}).toThrow("the argument must be type number")
-            expect(()=>{p.moveVertical("x")}).toThrow("the argument must be type number")
-            expect(()=>{p.moveHorizontal("x")}).toThrow("the argument must be type number")
-            // expect(()=>{p.moveVertical()}).toThrow("the argument must be type number")
+        it("the function must get argument", function () {
+            let p = new Point({ x: 3, y: 4 })
+            expect(() => { new Point({ x: "x", y: "y" }) }).toThrow(new Error("the argument must be type number"))
+            expect(() => { p.moveVertical() }).toThrow("the function must get argument")
+            expect(() => { p.moveHorizontal() }).toThrow("the function must get argument")
 
         })
-        
+        it("the function must get arguments from type number", function () {
+            let p = new Point({ x: 3, y: 4 })
+            expect(() => { new Point({ x: "x", y: "y" }) }).toThrow("the argument must be type number")
+            expect(() => { p.moveVertical("x") }).toThrow("the argument must be type number")
+            expect(() => { p.moveHorizontal("x") }).toThrow("the argument must be type number")
+
+        })
+
     })
 
 })

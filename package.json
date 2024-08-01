@@ -8,6 +8,9 @@
     "test:coverage":"jest --coverage"
   },
   "dependencies": {
+    
+  },
+  "devDependencies": {
     "jest": "^29.7.0"
   },
   "repository": {

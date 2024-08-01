@@ -1,6 +1,6 @@
 class Point {
-    constructor({ x = 0, y = 0 } = {}) {
-        if (typeof (x) != "number" || typeof (y) != "number") {
+    constructor({x=0,y=0}={}){
+        if (typeof (x) !== "number" || typeof (y) !== "number") {
             throw new Error("the argument must be type number")
         }
         this.x = x;
@@ -12,7 +12,7 @@ class Point {
         }
 
 
-        if (typeof (value) != "number") {
+        if (typeof (value) !== "number") {
             throw new Error("the argument must be type number")
         }
 
@@ -22,7 +22,7 @@ class Point {
         if (!value) {
             throw new Error("the function must get argument")
         }
-        if (typeof (value) != "number") {
+        if (typeof (value) !== "number") {
             throw new Error("the argument must be type number")
         }
         this.x += value;

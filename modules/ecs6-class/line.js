@@ -2,11 +2,8 @@ const Point = require("./point");
 
 class Line {
     constructor({ point1 = new Point(), point2 = new Point(), n = undefined, slope = undefined }) {
-        console.log(typeof(point1), typeof(point2), "typeooooooooooop1p2p2p1p");
 
-        // if (typeof (x) != "number" || typeof (y) != "number") {
-        //     throw new Error("aaaa")
-        // }
+      
         this.point1 = point1;
         this.point2 = point2;
         this.slope = slope;
@@ -22,7 +19,7 @@ class Line {
         if (this.slope === undefined) {
             throw new Error("the slope must be defined")
         }
-        if (typeof (this.slope) != "number") {
+        if (typeof (this.slope) !== "number") {
             throw new Error("the slope must be number")
         }
         this.n = this.point1.y - this.slope * this.point1.x
@@ -42,8 +39,20 @@ class Line {
         if (x === undefined) {
             throw new Error("the function getPointByX must get x")
         }
-        if (typeof (x) != "number") {
+        if (typeof (x) !== "number") {
             throw new Error("the function getPointByX must get x of type number")
+        }
+        if (this.slope === undefined) {
+            throw new Error("slope must be defined")
+        }
+        if (typeof (this.slope) !== "number") {
+            throw new Error("slope must of type number")
+        }
+        if (this.n === undefined) {
+            throw new Error("n must be defined")
+        }
+        if (typeof (this.n) !== "number") {
+            throw new Error("n must be number")
         }
         let y = this.slope * x + this.n
         return new Point({ x: x, y: y })
@@ -53,7 +62,7 @@ class Line {
         if (y === undefined) {
             throw new Error("the function getPointByY must get y")
         }
-        if (typeof (y) != "number") {
+        if (typeof (y) !== "number") {
             throw new Error("the function getPointByY must get y of type number")
         }
 
